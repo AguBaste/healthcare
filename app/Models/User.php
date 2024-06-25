@@ -18,6 +18,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastname',
+        'dob',
+        'dni',
+        'role_id',
         'email',
         'password',
     ];
@@ -43,5 +47,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role(){
+        return $this->hasMany(Role::class);
+    }
+    public function pressure(){
+        return $this->hasMany(Pressure::class);
+    }
+    public function chart(){
+        return $this->hasMany(Chart::class);
+    }
+    public function diabete(){
+        return $this->hasMany(Diabete::class);
+    }
+    public function appointment(){
+        return $this->hasMany(Appointment::class);
+    }
+    public function alergy(){
+        return $this->belongsToMany(Alergy::class);
+    }
+    public function diagnostic(){
+        return $this->belongsToMany(Diagnostic::class);
     }
 }
