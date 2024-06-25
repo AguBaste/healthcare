@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diabete;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DiabeteController extends Controller
@@ -12,7 +13,9 @@ class DiabeteController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user()->id;
+        $diabetes = Diabete::orderBy('date','desc')->where('user_id',$user)->get();
+        return view('diabete.index',compact('diabetes'));
     }
 
     /**
@@ -20,7 +23,7 @@ class DiabeteController extends Controller
      */
     public function create()
     {
-        //
+        return view('diabete.create');
     }
 
     /**
@@ -28,7 +31,23 @@ class DiabeteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'bsl'=>'required',
+            'date'=>'required',
+            'time'=>'required',
+            'comment'=>'max:255'
+        ]);
+
+        $user = auth()->user()->id;
+        Diabete::create([
+            'bsl'=>$request->bsl,
+            'date'=>$request->date,
+            'time'=>$request->time,
+            'user_id'=>$user,
+            'comment'=>$request->comment
+        ]);
+        return redirect(route('diabete.index'))->with('status','medición guardada exitosamente');
     }
 
     /**
@@ -60,6 +79,7 @@ class DiabeteController extends Controller
      */
     public function destroy(Diabete $diabete)
     {
-        //
+        $diabete->delete();
+        return redirect(route('diabete.index'))->with('status','medición borrada exitosamente');
     }
 }

@@ -15,13 +15,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         Resumen
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
                         Cartilla
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('diabete.index')" :active="request()->routeIs('diabete.index')">
                         Mi Diabetes
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure.index')">
                         Mi presión arterial
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -122,3 +122,4 @@
         </div>
     </div>
 </nav>
+

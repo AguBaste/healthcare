@@ -16,6 +16,10 @@ class Schedule extends Model
         'break_end',
         'provider_id'
     ];
+    protected $cast=[
+        'start'=> 'date',
+        'end'=>'date',
+    ];
     public function provider(){
         return $this->belongsTo(Provider::class);
     }

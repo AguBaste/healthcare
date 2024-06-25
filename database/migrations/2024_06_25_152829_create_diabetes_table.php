@@ -16,7 +16,7 @@ return new class extends Migration
             $table->float('bsl');
             $table->date('date');
             $table->time('time');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->foreignId('user_id')->cascade();
             $table->timestamps();
         });
