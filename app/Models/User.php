@@ -70,4 +70,7 @@ class User extends Authenticatable
     public function diagnostic(){
         return $this->belongsToMany(Diagnostic::class);
     }
+    public function provider(){
+        return $this->hasMany(Provider::class);
+    }
 }

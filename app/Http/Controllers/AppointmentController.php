@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Schedule;
+
 use Illuminate\Http\Request;
+
 
 class AppointmentController extends Controller
 {
@@ -12,7 +15,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('appointment.index');
     }
 
     /**
@@ -20,7 +23,8 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $schedule = Schedule::where('provider_id',1)->get();
+        return view('appointment.create',compact('schedule'));
     }
 
     /**

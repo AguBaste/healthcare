@@ -8,6 +8,9 @@ use App\Models\Diagnostic;
 use App\Models\Insurance;
 use App\Models\Role;
 use App\Models\Alergy;
+use App\Models\Provider;
+use App\Models\Schedule;
+
 
 
 
@@ -80,6 +83,36 @@ class DatabaseSeeder extends Seeder
             'role_id'=>2,
             'password'=>'sprinter413',
             'email' => 'enzorottino@hotmail.com',
+        ]);
+
+        Provider::factory()->create([
+            'licence'=>'258642',
+            'user_id'=>2,
+            'specialty_id'=>1
+        ]);
+        Schedule::factory()->create([
+            'day'=>'lunes',
+            'start'=>'8:00:00',
+            'end'=>'16:00:00',
+            'break_start'=>'12:00:00',
+            'break_end'=>'13:00:00',
+            'provider_id'=>1
+        ]);
+         Schedule::factory()->create([
+            'day'=>'martes',
+            'start'=>'8:00:00',
+            'end'=>'16:00:00',
+            'break_start'=>'12:00:00',
+            'break_end'=>'13:00:00',
+            'provider_id'=>1
+        ]);
+         Schedule::factory()->create([
+            'day'=>'miercoles',
+            'start'=>'8:00:00',
+            'end'=>'16:00:00',
+            'break_start'=>'12:00:00',
+            'break_end'=>'13:00:00',
+            'provider_id'=>1
         ]);
     }
 }

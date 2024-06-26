@@ -14,4 +14,10 @@ class Provider extends Model
     public function appointment(){
         return $this->hasMany(Appointment::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function specialy(){
+        return $this->hasMany(Specialty::class);
+    }
 }

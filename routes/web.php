@@ -5,6 +5,8 @@ use App\Http\Controllers\DiabeteController;
 use App\Http\Controllers\PressureController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ScheduleController;
+
 
 
 
@@ -29,7 +31,8 @@ Route::get('/dashboard', function () {
     Route::resource('chart',ChartController::class);
     Route::resource('diabete',DiabeteController::class);
     Route::resource('pressure',PressureController::class);
-    Route::resource('appointemnt',AppointmentController::class);
+    Route::resource('appointment',AppointmentController::class);
+    Route::resource('schedule',ScheduleController::class);
 
 });
 
