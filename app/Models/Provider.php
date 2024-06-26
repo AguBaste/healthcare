@@ -17,7 +17,7 @@ class Provider extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function specialy(){
-        return $this->hasMany(Specialty::class);
+    public function specialty(){
+        return $this->belongsTo(Specialty::class);
     }
 }

@@ -85,10 +85,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Cartilla
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dashboard')">
                 Mi Diabetes
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('dashboard')">
                 Mi presión arterial
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
@@ -122,4 +122,8 @@
         </div>
     </div>
 </nav>
-
+@if(session('status'))
+    <div class="bg-green-500 text-center p-4">
+        {{ session('status') }}
+    </div>
+@endif

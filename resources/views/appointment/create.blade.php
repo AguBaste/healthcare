@@ -17,8 +17,8 @@
                             
                              <x-input-label for="bsl" value="doctor" />
                              <select name="provider">
-                                @foreach ($schedule as $item)
-                                    <option value="{{$item->provider_id}}">{{$item->provider->user->name .' ' . $item->provider->user->lastname . ' ( ' . $item->provider->specialty->description . ' )'}}</option>
+                                @foreach ($providers as $item)
+                                    <option value="{{$item->id}}">{{$item->user->name .' '.$item->user->lastname .' ( '. $item->specialty->description .' )' }}</option>
                                 @endforeach
                              </select>
                              <x-input-error :messages="$errors->get('provider')" class="mt-2" />

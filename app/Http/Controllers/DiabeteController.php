@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diabete;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DiabeteController extends Controller
@@ -55,7 +54,6 @@ class DiabeteController extends Controller
      */
     public function show(Diabete $diabete)
     {
-        //
     }
 
     /**
@@ -63,7 +61,8 @@ class DiabeteController extends Controller
      */
     public function edit(Diabete $diabete)
     {
-        //
+               return view('diabete.edit',compact('diabete'));
+
     }
 
     /**
@@ -71,7 +70,18 @@ class DiabeteController extends Controller
      */
     public function update(Request $request, Diabete $diabete)
     {
-        //
+        $request->validate([
+            'bsl'=>'required',
+            'date'=>'required',
+            'time'=>'required',
+            'comment'=>'max:255'
+        ]);
+        $diabete->bsl = $request->bsl;
+        $diabete->date = $request->date;
+        $diabete->time = $request->time;
+        $diabete->comment = $request->comment;
+        $diabete->update();
+        return redirect(route('diabete.index'))->with('status','medición actualizada exitosamente');
     }
 
     /**

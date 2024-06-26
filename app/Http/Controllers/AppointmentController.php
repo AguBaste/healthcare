@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Provider;
 use App\Models\Schedule;
 
 use Illuminate\Http\Request;
@@ -23,8 +24,8 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        $schedule = Schedule::where('provider_id',1)->get();
-        return view('appointment.create',compact('schedule'));
+        $providers = Provider::with('user','specialty')->get();
+        return view('appointment.create',compact('providers'));
     }
 
     /**

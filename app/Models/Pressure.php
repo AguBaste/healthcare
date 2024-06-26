@@ -14,7 +14,11 @@ class Pressure extends Model
         'heart',
         'date',
         'time',
-        'comment'
+        'comment',
+        'user_id'
+    ];
+    protected $casts = [
+        'date'=>'date'
     ];
     public function user(){
         return $this->belongsTo(User::class);

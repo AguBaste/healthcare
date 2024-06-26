@@ -12,6 +12,6 @@ class Specialty extends Model
     ];
     use HasFactory;
     public function provider(){
-        return $this->belongsTo(Provider::class);
+        return $this->hasMany(Provider::class);
     }
 }

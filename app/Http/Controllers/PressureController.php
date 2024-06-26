@@ -12,7 +12,8 @@ class PressureController extends Controller
      */
     public function index()
     {
-        //
+        $pressures = Pressure::orderBy('date','desc')->get();
+        return view('pressure.index',compact('pressures'));
     }
 
     /**
@@ -20,7 +21,7 @@ class PressureController extends Controller
      */
     public function create()
     {
-        //
+        return view('pressure.create');
     }
 
     /**
@@ -28,7 +29,25 @@ class PressureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'systolic'=>'required',
+            'diastolic'=>'required',
+            'heart'=>'required',
+            'date'=>['required','date'],
+            'time'=>'required',
+            'comments'=>'max:255'
+        ]);
+        $user_id = auth()->user()->id;
+        Pressure::create([
+            'systolic'=>$request->systolic,
+            'diastolic'=>$request->diastolic,
+            'heart'=>$request->heart,
+            'date'=>$request->date,
+            'time'=>$request->time,
+            'comment'=>$request->comment,
+            'user_id'=>$user_id
+        ]);
+        return redirect(route('pressure.index'))->with('status', 'medición guardada exitosamente');
     }
 
     /**
@@ -36,7 +55,6 @@ class PressureController extends Controller
      */
     public function show(Pressure $pressure)
     {
-        //
     }
 
     /**
@@ -44,7 +62,8 @@ class PressureController extends Controller
      */
     public function edit(Pressure $pressure)
     {
-        //
+                return view('pressure.edit',compact('pressure'));
+
     }
 
     /**
@@ -52,7 +71,22 @@ class PressureController extends Controller
      */
     public function update(Request $request, Pressure $pressure)
     {
-        //
+        $request->validate([
+            'systolic'=>'required',
+            'diastolic'=>'required',
+            'heart'=>'required',
+            'date'=>['required','date'],
+            'time'=>'required',
+            'comments'=>'max:255'
+        ]);
+        $pressure->systolic = $request->systolic;
+        $pressure->diastolic = $request->diastolic; 
+        $pressure->heart = $request->heart;
+        $pressure->comment = $request->comment;
+        $pressure->date = $request->date;
+        $pressure->time = $request->time;
+        $pressure->update();
+        return redirect(route('pressure.index'))->with('status','medición actualizado exitosamente');
     }
 
     /**
