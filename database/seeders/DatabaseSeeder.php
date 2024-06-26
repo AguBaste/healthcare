@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'patient'
         ]);
         Role::factory()->create([
-            'description'=>'doctor'
+            'description'=>'provider'
         ]);
         Role::factory()->create([
             'description'=>'director'
@@ -71,9 +71,18 @@ class DatabaseSeeder extends Seeder
             'lastname'=>'basterrica',
             'dob'=>'1986/09/01',
             'dni'=>'32378366',
-            'role_id'=>1,
+            'role_id'=>3,
             'password'=>'sprinter413',
             'email' => 'agustinbasterrica@hotmail.com',
+        ]);
+         User::factory()->create([
+            'name' => 'aida',
+            'lastname'=>'bianconi',
+            'dob'=>'1965/01/27',
+            'dni'=>'11615518',
+            'role_id'=>1,
+            'password'=>'sprinter413',
+            'email' => 'aidabianconi@hotmail.com',
         ]);
          User::factory()->create([
             'name' => 'enzo',
@@ -87,7 +96,7 @@ class DatabaseSeeder extends Seeder
 
         Provider::factory()->create([
             'licence'=>'258642',
-            'user_id'=>2,
+            'user_id'=>3,
             'specialty_id'=>1
         ]);
         Schedule::factory()->create([

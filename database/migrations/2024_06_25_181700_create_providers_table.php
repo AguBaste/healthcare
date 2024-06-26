@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
             $table->string('licence');
+            $table->foreignId('user_id')->cascade();
             $table->foreignId('specialty_id')->cascade();
             $table->timestamps();
         });
