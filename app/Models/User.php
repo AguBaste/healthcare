@@ -48,7 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    protected $casts =[
+        'dob'=> 'date'
+    ];
     public function pressure(){
         return $this->hasMany(Pressure::class);
     }

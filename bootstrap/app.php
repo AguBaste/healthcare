@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\Director;
 use App\Http\Middleware\Provider;
 use App\Http\Middleware\Patient;
+use App\Http\Middleware\Secretary;
 
 
 
@@ -20,7 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'director'=>Director::class,
             'provider'=>Provider::class,
-            'patient'=>Patient::class
+            'patient'=>Patient::class,
+            'secretary'=>Secretary::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

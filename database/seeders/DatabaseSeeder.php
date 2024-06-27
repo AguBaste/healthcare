@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'lastname'=>'basterrica',
             'dob'=>'1986/09/01',
             'dni'=>'32378366',
-            'role'=>'director',
+            'role'=>'secretary',
             'password'=>'sprinter413',
             'email' => 'agustinbasterrica@hotmail.com',
         ]);
@@ -112,5 +112,15 @@ class DatabaseSeeder extends Seeder
             'break_end'=>'13:00:00',
             'provider_id'=>3
         ]);
+        Alergy::factory()->create([
+            'description'=> 'maní'
+        ]);
+        Alergy::factory()->create([
+            'description'=> 'penicilina'
+        ]);
+        Alergy::factory()->create([
+            'description'=> 'polen'
+        ]);
+
     }
 }

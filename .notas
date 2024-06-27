@@ -2,3 +2,7 @@ tengo que validar que si la cita esta a menos de 24hs no se pueda cancelar
 npm i 
 composer install
 php artisan key:generate
+
+agregar un estado a la cita que el medico va a poder cambiar 
+arreglar el quilombo de vista que tengo 
+

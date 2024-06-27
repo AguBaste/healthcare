@@ -14,7 +14,6 @@ class Appointment extends Model
         'provider_id',
         'user_id',
         'reason',
-        'image'
     ];
     public function user(){
         return $this->belongsTo(User::class);

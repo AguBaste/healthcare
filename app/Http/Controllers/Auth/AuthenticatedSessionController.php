@@ -35,6 +35,10 @@ class AuthenticatedSessionController extends Controller
             }else{
                 if($request->user()->role === 'provider'){
                     return redirect(route('provider'));
+                }else{
+                    if ($request->user()->role ==='secretary') {
+                        return redirect(route('secretary'));
+                    }
                 }
             }
         }

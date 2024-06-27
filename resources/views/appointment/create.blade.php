@@ -1,4 +1,16 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+       @vite(['resources/css/app.css','resources/js/app.js'])
+</head>
+<body>
+    
+@include('layouts.navigationSecretary')
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -9,21 +21,33 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white text-center dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('diabete.store') }}">
+                    <form method="POST" action="{{ route('appointment.store') }}">
                          @csrf
 
-                         <!-- blood sugar level -->
+                         <!-- provider -->
                          <div>
                             
-                             <x-input-label for="bsl" value="doctor" />
-                             <select name="provider">
+                             <x-input-label for="provider_id" value="doctor" />
+                             <select name="provider_id">
                                 @foreach ($providers as $item)
                                     <option value="{{$item->id}}">{{$item->user->name .' '.$item->user->lastname .' ( '. $item->specialty->description .' )' }}</option>
                                 @endforeach
                              </select>
-                             <x-input-error :messages="$errors->get('provider')" class="mt-2" />
+                             <x-input-error :messages="$errors->get('provider_id')" class="mt-2" />
                          </div>
 
+                         <!-- patient -->
+                         <div>
+                            
+                             <x-input-label for="patient_id" value="paciente" />
+                             <select name="patient_id">
+                                @foreach ($patients as $patient)
+                                    <option value="{{$patient->id}}">{{$patient->name .' '.$patient->lastname .' '. $patient->dni }}</option>
+                                @endforeach
+                             </select>
+                             <x-input-error :messages="$errors->get('patient_id')" class="mt-2" />
+                         </div>
+                         
                          <!-- date -->
                          <div class="mt-4">
                              <x-input-label for="date" value="fecha" />
@@ -55,4 +79,6 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+
+</body>
+</html>

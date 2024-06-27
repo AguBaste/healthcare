@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chart;
+use App\Models\User;
+use App\Models\Insurance;
+
+
 use Illuminate\Http\Request;
 
 class ChartController extends Controller
@@ -11,8 +15,9 @@ class ChartController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $chart = Chart::where('user_id',auth()->user()->id)->first();
+        return view('chart.index',compact('chart'));
     }
 
     /**
@@ -20,7 +25,9 @@ class ChartController extends Controller
      */
     public function create()
     {
-        //
+        $patients = User::where('role','patient')->get();
+        $insurances = Insurance::orderBy('description','desc')->get();
+        return view('chart.create',compact('patients','insurances'));
     }
 
     /**
@@ -28,7 +35,27 @@ class ChartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $request->validate([
+            'smoke'=>'required',
+            'glasses'=>'required',
+            'user_id'=>'required',
+            'insurance'=>'required',
+            'height'=>'required',
+            'weight'=>'required'
+        ]);
+ 
+       
+       Chart::create([
+            'height'=>floatval($request->height),
+            'weight'=>floatval($request->weight),
+            'member_id'=>$request->member_id,
+            'smoke'=>$request->smoke,
+            'glasses'=>$request->glasses,
+            'user_id'=>$request->user_id,
+            'insurance_id'=>$request->insurance 
+        ]);
+        return redirect(route('provider'))->with('status','cartilla creada exitosamente');
     }
 
     /**

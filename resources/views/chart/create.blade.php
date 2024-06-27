@@ -1,4 +1,14 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    @vite(['resources/css/app.css','resources/js/app.js'])
+</head>
+<body>
+    <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,17 +22,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Resumen
+                    <x-nav-link :href="route('chart.create')" :active="request()->routeIs('chart.create')">
+                        crear cartilla 
                     </x-nav-link>
                     <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
-                        Cartilla
+                        ver turnos
                     </x-nav-link>
                     <x-nav-link :href="route('diabete.index')" :active="request()->routeIs('diabete.index')">
-                        Mi Diabetes
+                        ver algo mas 
                     </x-nav-link>
                     <x-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure.index')">
-                        Mi presión arterial
+                        ver otra cosa distinta 
                     </x-nav-link>
                     <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                         Turnos
@@ -35,7 +45,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>hola {{ Auth::user()->name }}!</div>
+                            <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -82,13 +92,13 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Resumen
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Cartilla
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dibete.index')">
+            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dashboard')">
                 Mi Diabetes
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure')">
+            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('dashboard')">
                 Mi presión arterial
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
@@ -127,3 +137,88 @@
         {{ session('status') }}
     </div>
 @endif
+
+</body>
+</html>
+
+ <div class="py-12">
+         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                     <form method="POST" action="{{ route('chart.store') }}">
+                         @csrf
+
+                         <!-- blood sugar level -->
+                         <div>
+                             <x-input-label for="user_id" value="paciente" />
+                             <select name="user_id" required>
+                                @foreach ($patients as $patient)
+                                    <option value="{{$patient->id}}">{{$patient->name . ' ' . $patient->lastname . ' '. $patient->dni}}</option>
+                                @endforeach
+                             </select>
+                             <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
+                         </div>
+
+                         <!-- insurance -->
+                         <div class="mt-4">
+                             <x-input-label for="insurance" value="obra social" />
+                             <select name="insurance">
+                                @foreach ($insurances as $insurance)
+                                    <option value="{{$insurance->id}}"{{$insurance->description == 'ninguna' ? 'selected' : ''}}>{{$insurance->description}}</option>
+                                @endforeach
+                             </select>
+                             <x-input-error :messages="$errors->get('insurance')" class="mt-2" />
+                         </div>
+
+                         <!-- member_id -->
+                         <div class="mt-4">
+                             <x-input-label for="member_id" value="número de socio" />
+                             <x-text-input class="block mt-1 w-full" type="text" name="member_id"/>
+                             <x-input-error :messages="$errors->get('member_id')" class="mt-2" />
+                         </div>
+
+                         <!-- weight -->
+                         <div class="mt-4">
+                             <x-input-label for="weight" value="peso" />
+                             <x-text-input class="block mt-1 w-full" type="number" step="0.01" min="0" name="weight"/>
+                             <x-input-error :messages="$errors->get('weight')" class="mt-2" />
+                         </div>
+
+                          <!-- height -->
+                         <div class="mt-4">
+                             <x-input-label for="height" value="altura" />
+                             <x-text-input class="block mt-1 w-full" type="number" step="0.01" min="0" name="height"/>
+                             <x-input-error :messages="$errors->get('height')" class="mt-2" />
+                         </div>
+
+                         <!-- smoke -->
+                         <div class="mt-4">
+                             <x-input-label for="smoke" value="fuma" />
+                             <select name="smoke">
+                                <option value="si">si</option>
+                                <option value="no" selected>no</option>
+                             </select>
+                             <x-input-error :messages="$errors->get('smoke')" class="mt-2" />
+                         </div>
+
+                          <!-- glasses -->
+                         <div class="mt-4">
+                             <x-input-label for="glasses" value="anteojos" />
+                             <select name="glasses">
+                                <option value="si">si</option>
+                                <option value="no" selected>no</option>
+                             </select>
+                             <x-input-error :messages="$errors->get('glasses')" class="mt-2" />
+                         </div>
+
+
+                         <div class="flex items-center justify-center mt-4">
+                             <x-primary-button class="ms-3">
+                                 siguiente
+                             </x-primary-button>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>

@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white text-center dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('diabete.create') }}">crear</a>
+                    <a href="{{ route('diabete.create') }}">anotar nueva medición de diabetes</a>
 
                 </div>
             </div>

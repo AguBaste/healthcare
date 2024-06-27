@@ -17,8 +17,7 @@ return new class extends Migration
             $table->time('time');
             $table->foreignId('provider_id')->cascade();
             $table->foreignId('user_id')->cascade();
-            $table->string('reason');
-            $table->string('image')->nullable();
+            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }

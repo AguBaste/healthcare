@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Provider;
+use App\Models\User;
 use App\Models\Schedule;
 
 use Illuminate\Http\Request;
@@ -16,7 +17,10 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('appointment.index');
+        $provider = auth()->user()->provider[0]->id;
+        $appointments = Appointment::where('provider_id',$provider)->orderBy('day','desc')->get();
+
+        return view('appointment.index',compact('appointments'));
     }
 
     /**
@@ -25,7 +29,8 @@ class AppointmentController extends Controller
     public function create()
     {
         $providers = Provider::with('user','specialty')->get();
-        return view('appointment.create',compact('providers'));
+        $patients = User::where('role','patient')->orderBy('lastname','desc')->get();
+        return view('appointment.create',compact('providers','patients'));
     }
 
     /**
@@ -33,7 +38,21 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $request->validate([
+            'date'=>'required',
+            'time'=>'required',
+            'provider_id'=>'required',
+            'patient_id'=>'required',
+        ]);
+        Appointment::create([
+            'day'=>$request->date,
+            'time'=>$request->time,
+            'provider_id'=>$request->provider_id,
+            'user_id'=>$request->patient_id,
+            'reason'=>$request->comment
+        ]);
+        return redirect(route('secretary'))->with('status','cita agendada exitosamente');
     }
 
     /**

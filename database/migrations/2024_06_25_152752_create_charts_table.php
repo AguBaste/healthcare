@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('charts', function (Blueprint $table) {
             $table->id();
-            $table->string('member_id');
-            $table->boolean('smoke');
-            $table->boolean('glasses');
+            $table->float('height');
+            $table->float('weight');
+            $table->string('member_id')->nullable();
+            $table->string('smoke');
+            $table->string('glasses');
             $table->foreignId('user_id')->cascade();
             $table->foreignId('insurance_id')->cascade();
             $table->timestamps();

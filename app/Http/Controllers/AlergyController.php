@@ -20,7 +20,8 @@ class AlergyController extends Controller
      */
     public function create()
     {
-        //
+        $alergies = Alergy::orderBy('description', 'desc')->get();
+        return view('alergy.create',compact('alergies'));
     }
 
     /**

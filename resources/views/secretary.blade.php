@@ -5,17 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
-    @include('layouts.navigationProvider')
-
-@if(session('status'))
-    <div class="bg-green-500 text-center p-4">
-        {{ session('status') }}
-    </div>
-@endif
-
+    @include('layouts.navigationSecretary')
 </body>
 </html>
-

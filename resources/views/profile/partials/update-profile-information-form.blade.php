@@ -18,11 +18,25 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-label for="name" value="nombre" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" value="{{old('name', $user->name)}}" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
+        <div>
+            <x-input-label for="lastname" value="apellido" />
+            <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full" value="{{old('lastname', $user->lastname)}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
+        </div>
+        <div>
+            <x-input-label for="dni" value="documento" />
+            <x-text-input id="dni" name="dni" type="text" class="mt-1 block w-full" value="{{old('dni', $user->dni)}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('dni')" />
+        </div>
+         <div>
+            <x-input-label for="dob" value="fecha de nacimiento" />
+            <x-text-input id="dob" name="dob" type="date" class="mt-1 block w-full" value="{{old('dob', $user->dob->format('Y-m-d'))}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
+        </div>
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />

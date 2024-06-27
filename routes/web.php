@@ -6,6 +6,12 @@ use App\Http\Controllers\PressureController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AlergyController;
+use App\Http\Controllers\UsersAlergyController;
+use App\Http\Controllers\DiagnosticController;
+use App\Http\Controllers\UsersDiagnosticController;
+
+
 
 
 
@@ -35,6 +41,10 @@ Route::get('/provider', function () {
     return view('provider');
 })->middleware('provider')->name('provider');
 
+Route::get('/secretary', function () {
+    return view('secretary');
+})->middleware('secretary')->name('secretary');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -48,6 +58,7 @@ Route::get('/dashboard', function () {
     Route::resource('pressure',PressureController::class);
     Route::resource('appointment',AppointmentController::class);
     Route::resource('schedule',ScheduleController::class);
+    Route::resource('alergy',AlergyController::class);
 
 });
 
