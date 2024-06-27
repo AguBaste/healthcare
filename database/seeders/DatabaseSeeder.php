@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
             'end'=>'16:00:00',
             'break_start'=>'12:00:00',
             'break_end'=>'13:00:00',
-            'provider_id'=>1
+            'provider_id'=>3
         ]);
          Schedule::factory()->create([
             'day'=>'martes',
@@ -113,7 +113,7 @@ class DatabaseSeeder extends Seeder
             'end'=>'16:00:00',
             'break_start'=>'12:00:00',
             'break_end'=>'13:00:00',
-            'provider_id'=>1
+            'provider_id'=>3
         ]);
          Schedule::factory()->create([
             'day'=>'miercoles',
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
             'end'=>'16:00:00',
             'break_start'=>'12:00:00',
             'break_end'=>'13:00:00',
-            'provider_id'=>1
+            'provider_id'=>3
         ]);
     }
 }
