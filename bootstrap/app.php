@@ -3,8 +3,12 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\DirectorMiddleware;
-use App\Http\Middleware\PatientMiddleware;
+use App\Http\Middleware\Director;
+use App\Http\Middleware\Provider;
+use App\Http\Middleware\Patient;
+
+
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,7 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-
+        $middleware->alias([
+            'director'=>Director::class,
+            'provider'=>Provider::class,
+            'patient'=>Patient::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

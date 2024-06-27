@@ -16,12 +16,28 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+
+
+
+
+
+
+
 Route::middleware(['auth'])->group(function () {
+
+
+Route::get('/director', function () {
+    return view('director');
+})->middleware('director')->name('director');
+
+Route::get('/provider', function () {
+    return view('provider');
+})->middleware('provider')->name('provider');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Specialty;
 use App\Models\Diagnostic;
 use App\Models\Insurance;
-use App\Models\Role;
 use App\Models\Alergy;
 use App\Models\Provider;
 use App\Models\Schedule;
@@ -27,18 +26,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        Role::factory()->create([
-            'description'=>'patient'
-        ]);
-        Role::factory()->create([
-            'description'=>'provider'
-        ]);
-        Role::factory()->create([
-            'description'=>'director'
-        ]);
-        Role::factory()->create([
-            'description'=>'secretary'
-        ]);
+
+
         Specialty::factory()->create([
             'description'=>'nuerocirujano'
         ]);
@@ -71,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'lastname'=>'basterrica',
             'dob'=>'1986/09/01',
             'dni'=>'32378366',
-            'role_id'=>3,
+            'role'=>'director',
             'password'=>'sprinter413',
             'email' => 'agustinbasterrica@hotmail.com',
         ]);
@@ -80,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'lastname'=>'bianconi',
             'dob'=>'1965/01/27',
             'dni'=>'11615518',
-            'role_id'=>1,
+            'role'=>'patient',
             'password'=>'sprinter413',
             'email' => 'aidabianconi@hotmail.com',
         ]);
@@ -89,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'lastname'=>'rottino',
             'dob'=>'1975/01/12',
             'dni'=>'27090163',
-            'role_id'=>2,
+            'role'=>'provider',
             'password'=>'sprinter413',
             'email' => 'enzorottino@hotmail.com',
         ]);

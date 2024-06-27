@@ -21,7 +21,7 @@ class User extends Authenticatable
         'lastname',
         'dob',
         'dni',
-        'role_id',
+        'role',
         'email',
         'password',
     ];
@@ -49,9 +49,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
     public function pressure(){
         return $this->hasMany(Pressure::class);
     }

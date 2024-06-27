@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('role_id')->cascade();
+            $table->enum('role',['patient','director','provider','secretary'])->default('patient');
             $table->timestamps();
         });
 
