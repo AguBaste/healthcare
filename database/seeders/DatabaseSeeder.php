@@ -9,6 +9,7 @@ use App\Models\Insurance;
 use App\Models\Alergy;
 use App\Models\Provider;
 use App\Models\Schedule;
+use App\Models\Appointment;
 
 
 
@@ -26,8 +27,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-
+        Appointment::factory()->create([
+            'event'=>'cita',
+            'start_date'=>'2024-12-6 08:00',
+            'end_date'=>'2024-12-6 08:30',
+            'user_id'=>2,
+            'provider_id'=>3
+        ]);
         Specialty::factory()->create([
             'description'=>'nuerocirujano'
         ]);

@@ -18,9 +18,18 @@ class AppointmentController extends Controller
     public function index()
     {
         $provider = auth()->user()->provider[0]->id;
-        $appointments = Appointment::where('provider_id',$provider)->orderBy('day','desc')->get();
-
-        return view('appointment.index',compact('appointments'));
+        $appointments = Appointment::where('provider_id',$provider)->get();
+        $providers = Provider::with('user','specialty')->get();
+        $patients = User::where('role','patient')->orderBy('lastname','desc')->get();
+        $events = [];
+        foreach($appointments as $event){
+            $events[] = [
+                'title'=> $event->user->name .' '. $event->user->lastname,
+                'start'=>$event->start_date,
+                'end'=>$event->end_date
+            ];
+        }
+        return view('appointment.index',compact('events','providers','patients'));
     }
 
     /**

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
-            $table->time('time');
+            $table->string('event');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->foreignId('provider_id')->cascade();
             $table->foreignId('user_id')->cascade();
-            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }
