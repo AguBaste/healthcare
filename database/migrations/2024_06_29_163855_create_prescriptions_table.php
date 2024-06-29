@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_alergies', function (Blueprint $table) {
+        Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
+            $table->string('formula');
+            $table->string('dosis');
+            $table->string('diagnostic');
+            $table->date('date');
+            $table->foreignId('provider_id')->cascade();
             $table->foreignId('user_id')->cascade();
-            $table->foreignId('alergies_id')->cascade();
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_alergies');
+        Schema::dropIfExists('prescriptions');
     }
 };

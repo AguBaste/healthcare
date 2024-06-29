@@ -16,8 +16,22 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-
+            @switch(auth()->user()->role)
+                @case('patient')
+                    @include('layouts.navigation')
+                    @break
+                @case('secretary')
+                    @include('layouts.navigationSecretary')
+                    @break
+                @case('provider')
+                    @include('layouts.navigationProvider')
+                    @break
+                 @case('director')
+                    @include('layouts.navigationDirector')
+                    @break
+                @default
+                    
+            @endswitch
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">

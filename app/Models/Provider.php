@@ -20,4 +20,7 @@ class Provider extends Model
     public function specialty(){
         return $this->belongsTo(Specialty::class);
     }
+    public function prescription(){
+        return $this->hasMany(Prescription::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\DiabeteController;
 use App\Http\Controllers\PressureController;
 use App\Http\Controllers\ChartController;
@@ -9,7 +10,8 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AlergyController;
 use App\Http\Controllers\UsersAlergyController;
 use App\Http\Controllers\DiagnosticController;
-use App\Http\Controllers\UsersDiagnosticController;
+use App\Http\Controllers\PrescriptionController;
+
 
 
 
@@ -33,17 +35,17 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
 
-Route::get('/director', function () {
-    return view('director');
-})->middleware('director')->name('director');
+Route::get('/directorDash', function () {
+    return view('directorDash');
+})->middleware('director')->name('directorDash');
 
-Route::get('/provider', function () {
-    return view('provider');
-})->middleware('provider')->name('provider');
+Route::get('/providerDash', function () {
+    return view('providerDash');
+})->middleware('provider')->name('providerDash');
 
-Route::get('/secretary', function () {
-    return view('secretary');
-})->middleware('secretary')->name('secretary');
+Route::get('/secretaryDash', function () {
+    return view('secretaryDash');
+})->middleware('secretary')->name('secretaryDash');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -59,6 +61,9 @@ Route::get('/dashboard', function () {
     Route::resource('appointment',AppointmentController::class);
     Route::resource('schedule',ScheduleController::class);
     Route::resource('alergy',AlergyController::class);
+    Route::resource('diagnostic',DiagnosticController::class)->middleware('provider');
+    Route::resource('prescription',PrescriptionController::class)->middleware('provider');
+    Route::resource('provider',ProviderController::class)->middleware('provider');
 
 });
 

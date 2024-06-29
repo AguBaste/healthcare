@@ -12,20 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('appointment.create')" :active="request()->routeIs('appointment.create')">
-                        crear turno
+                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('chart.index.index')">
+                        ver turnos
                     </x-nav-link>
-                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
-                        Cartilla
-                    </x-nav-link>
-                    <x-nav-link :href="route('diabete.index')" :active="request()->routeIs('diabete.index')">
-                        Mi Diabetes
-                    </x-nav-link>
-                    <x-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure.index')">
-                        Mi presión arterial
-                    </x-nav-link>
-                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                        Turnos
+                    <x-nav-link :href="route('provider.index')" :active="request()->routeIs('chart.index.index')">
+                        info doctores
                     </x-nav-link>
                 </div>
             </div>
@@ -79,21 +70,10 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('appointment.create')" :active="request()->routeIs('appointment.create')">
-                crear turno
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
-                Cartilla
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dibete.index')">
-                Mi Diabetes
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure')">
-                Mi presión arterial
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                turnos
+                ver turnos
             </x-responsive-nav-link>
+           
         </div>
 
         <!-- Responsive Settings Options -->

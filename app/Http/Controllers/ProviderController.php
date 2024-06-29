@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Provider;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ProviderController extends Controller
@@ -12,7 +13,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+       $providers = Provider::with('user','specialty')->get();
+        return view('provider.index',compact('providers'));
     }
 
     /**
@@ -35,8 +37,10 @@ class ProviderController extends Controller
      * Display the specified resource.
      */
     public function show(Provider $provider)
-    {
-        //
+    {   
+
+        $schedule = Schedule::where('provider_id',$provider->id)->get();
+        return view('provider.show',compact('schedule','provider'));
     }
 
     /**

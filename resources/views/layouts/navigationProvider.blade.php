@@ -15,20 +15,14 @@
                     <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                         mis turnos
                     </x-nav-link>
-                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+                    <x-nav-link :href="route('chart.create')" :active="request()->routeIs('chart.create')">
                         crear cartilla
                     </x-nav-link>
-                    <x-nav-link :href="route('diabete.index')" :active="request()->routeIs('diabete.index')">
-                        asignar alergias
-                    </x-nav-link>
-                    <x-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure.index')">
-                        diagnóstico
-                    </x-nav-link>
-                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
+                     <x-nav-link :href="route('prescription.create')" :active="request()->routeIs('prescription.create')">
                         receta
                     </x-nav-link>
-                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                        orden médica
+                  <x-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" >
+                        vademecum
                     </x-nav-link>
                 </div>
             </div>
@@ -82,21 +76,10 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Resumen
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+            <x-responsive-nav-link :href="route('chart.create')" :active="request()->routeIs('chart.create')">
                 Cartilla
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dashboard')">
-                Mi Diabetes
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('dashboard')">
-                Mi presión arterial
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                turnos
-            </x-responsive-nav-link>
+          
         </div>
 
         <!-- Responsive Settings Options -->

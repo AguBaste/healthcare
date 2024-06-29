@@ -27,13 +27,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        Appointment::factory()->create([
-            'event'=>'cita',
-            'start_date'=>'2024-12-6 08:00',
-            'end_date'=>'2024-12-6 08:30',
-            'user_id'=>2,
-            'provider_id'=>3
-        ]);
+  
         Specialty::factory()->create([
             'description'=>'nuerocirujano'
         ]);
@@ -52,15 +46,7 @@ class DatabaseSeeder extends Seeder
         Insurance::factory()->create([
            'description' => 'osfatum'
         ]);
-        Diagnostic::factory()->create([
-            'description'=>'gripe'
-        ]);
-        Diagnostic::factory()->create([
-            'description'=>'angina'
-        ]);
-        Diagnostic::factory()->create([
-            'description'=>'hernia'
-        ]);
+       
         User::factory()->create([
             'name' => 'agustín',
             'lastname'=>'basterrica',
@@ -88,7 +74,20 @@ class DatabaseSeeder extends Seeder
             'password'=>'sprinter413',
             'email' => 'enzorottino@hotmail.com',
         ]);
-
+        User::factory()->create([
+                    'name' => 'lorenzo',
+                    'lastname'=>'enrique',
+                    'dob'=>'1975/01/12',
+                    'dni'=>'27090162',
+                    'role'=>'provider',
+                    'password'=>'sprinter413',
+                    'email' => 'lorenzoenrique@hotmail.com',
+                ]);
+        Provider::factory()->create([
+            'licence'=>'268642',
+            'user_id'=>4,
+            'specialty_id'=>1
+        ]);        
         Provider::factory()->create([
             'licence'=>'258642',
             'user_id'=>3,
@@ -118,15 +117,5 @@ class DatabaseSeeder extends Seeder
             'break_end'=>'13:00:00',
             'provider_id'=>3
         ]);
-        Alergy::factory()->create([
-            'description'=> 'maní'
-        ]);
-        Alergy::factory()->create([
-            'description'=> 'penicilina'
-        ]);
-        Alergy::factory()->create([
-            'description'=> 'polen'
-        ]);
-
     }
 }

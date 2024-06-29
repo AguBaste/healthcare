@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
-</head>
-<body>
-    <h1 class="titulo">hola soy el director</h1>
-    <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -23,21 +12,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        ver doctores
+                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('chart.index.index')">
+                        alta doctor
                     </x-nav-link>
-                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
-                        ver turnos
-                    </x-nav-link>
-                    <x-nav-link :href="route('diabete.index')" :active="request()->routeIs('diabete.index')">
-                        ver algo mas 
-                    </x-nav-link>
-                    <x-nav-link :href="route('pressure.index')" :active="request()->routeIs('pressure.index')">
-                        ver otra cosa distinta 
-                    </x-nav-link>
-                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                        Turnos
-                    </x-nav-link>
+                   
                 </div>
             </div>
 
@@ -46,7 +24,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>hola {{ Auth::user()->name }}!</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -90,21 +68,10 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Resumen
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Cartilla
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('diabete.index')" :active="request()->routeIs('dashboard')">
-                Mi Diabetes
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('pressure.index')" :active="request()->routeIs('dashboard')">
-                Mi presión arterial
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
-                turnos
+                alta doctor
             </x-responsive-nav-link>
+           
         </div>
 
         <!-- Responsive Settings Options -->
@@ -138,7 +105,3 @@
         {{ session('status') }}
     </div>
 @endif
-
-</body>
-</html>
-

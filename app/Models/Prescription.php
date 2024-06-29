@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Appointment extends Model
+class Prescription extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'date'=> 'date'
+    ];
     protected $fillable = [
-        'date',
-        'time',
+        'dosis',
+        'user_id',
         'provider_id',
-        'user_id'
+        'formula',
+        'diagnostic',
+        'date'
     ];
     public function user(){
         return $this->belongsTo(User::class);

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users_Diagnostic;
+use App\Models\Treatment;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UsersDiagnosticController extends Controller
+class TreatmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class UsersDiagnosticController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Users_Diagnostic $users_Diagnostic)
+    public function show(Treatment $treatment)
     {
         //
     }
@@ -42,7 +43,7 @@ class UsersDiagnosticController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Users_Diagnostic $users_Diagnostic)
+    public function edit(Treatment $treatment)
     {
         //
     }
@@ -50,7 +51,7 @@ class UsersDiagnosticController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Users_Diagnostic $users_Diagnostic)
+    public function update(Request $request, Treatment $treatment)
     {
         //
     }
@@ -58,7 +59,7 @@ class UsersDiagnosticController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Users_Diagnostic $users_Diagnostic)
+    public function destroy(Treatment $treatment)
     {
         //
     }

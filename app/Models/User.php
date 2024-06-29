@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function provider(){
         return $this->hasMany(Provider::class);
     }
+    public function prescription(){
+        return $this->hasMany(Prescription::class);
+    }
+    
 }
