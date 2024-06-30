@@ -61,8 +61,7 @@ class DiabeteController extends Controller
      */
     public function edit(Diabete $diabete)
     {
-               return view('diabete.edit',compact('diabete'));
-
+        return view('diabete.edit',compact('diabete'));
     }
 
     /**

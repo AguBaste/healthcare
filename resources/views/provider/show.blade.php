@@ -9,7 +9,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="m-6 text-center">
-                        <h1><strong class="text-xl">{{$provider->user->name . ' ' . $provider->user->lastname}}</strong> {{$provider->specialty->description }}</h1>
+                        <h1><strong class="text-xl">{{$provider->name . ' ' . $provider->lastname}}</strong> {{$provider->specialty}}</h1>
                     </div>
                     <div class="w-auto">
                         <table class="table-auto w-full text-center">

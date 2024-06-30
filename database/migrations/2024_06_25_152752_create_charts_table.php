@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->float('height');
             $table->float('weight');
-            $table->string('member_id')->nullable();
             $table->string('smoke');
             $table->string('glasses');
             $table->foreignId('user_id')->cascade();
-            $table->foreignId('insurance_id')->cascade();
             $table->timestamps();
         });
     }

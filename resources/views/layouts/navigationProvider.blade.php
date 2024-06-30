@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                         mis turnos
                     </x-nav-link>
-                    <x-nav-link :href="route('chart.create')" :active="request()->routeIs('chart.create')">
-                        crear cartilla
+                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+                        historial pacientes
                     </x-nav-link>
-                     <x-nav-link :href="route('prescription.create')" :active="request()->routeIs('prescription.create')">
+                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs('prescription.index')">
                         receta
                     </x-nav-link>
                   <x-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" >

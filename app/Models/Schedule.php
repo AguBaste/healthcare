@@ -12,15 +12,13 @@ class Schedule extends Model
         'start',
         'end',
         'day',
-        'break_start',
-        'break_end',
         'provider_id'
     ];
     protected $cast=[
         'start'=> 'date',
         'end'=>'date',
     ];
-    public function provider(){
-        return $this->belongsTo(Provider::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

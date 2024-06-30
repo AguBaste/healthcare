@@ -11,16 +11,12 @@ class Chart extends Model
     protected $fillable=[
         'smoke',
         'glasses',
-        'member_id',
         'user_id',
-        'insurance_id',
         'height',
         'weight'
     ];
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function insurance(){
-        return $this->belongsTo(Insurance::class);
-    }
+
 }

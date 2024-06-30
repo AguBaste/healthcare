@@ -11,8 +11,8 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @foreach ($providers as $provider)
                         <div class="m-6 flex items-center justify-between ">
-                            <p>{{ $provider->user->name . ' ' . $provider->user->lastname }}</p>
-                            <p>{{$provider->specialty->description}}</p>
+                            <p>{{ $provider->name . ' ' . $provider->lastname }}</p>
+                            <p>{{$provider->specialty}}</p>
                             <a class="bg-teal-500 p-2 rounded text-white" href="{{ route('provider.show', $provider) }}">ver info</a>
                         </div>
                     @endforeach

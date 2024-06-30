@@ -33,6 +33,21 @@
             <x-input-error class="mt-2" :messages="$errors->get('dni')" />
         </div>
          <div>
+            <x-input-label for="phone" value="teléfono" />
+            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" value="{{old('phone', $user->phone)}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
+        <div>
+            <x-input-label for="insurance" value="obra social" />
+            <x-text-input id="insurance" name="insurance" type="text" class="mt-1 block w-full" value="{{old('insurance', $user->insurance)}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('insurance')" />
+        </div>
+        <div>
+            <x-input-label for="member_id" value="número de afiliado" />
+            <x-text-input id="member_id" name="member_id" type="text" class="mt-1 block w-full" value="{{old('member_id', $user->member_id)}}" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('member_id')" />
+        </div>
+         <div>
             <x-input-label for="dob" value="fecha de nacimiento" />
             <x-text-input id="dob" name="dob" type="date" class="mt-1 block w-full" value="{{old('dob', $user->dob->format('Y-m-d'))}}" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('lastname')" />

@@ -1,20 +1,8 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            panel
-        </h2>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if (auth()->user()->role == 'patient')
-
-                        @if ($chart == null)
-                            luego de tu primera visita al médico podras ver tu cartilla
-                        @else
-                              <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="text-center text-3xl m-4">Cartilla número {{ $chart->id }}</h1>
                     <div class="w-full">
                         <table class="table-auto w-full text-center">
@@ -55,22 +43,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                        @endif
-                    @elseif (auth()->user()->role == 'provider')
-                        <div class="text-center">
-                            <a class="bg-teal-500 rounded p-2 text-white" href="{{route('chart.create')}}">crear nueva cartilla</a>
-                        </div>
-                        <ul>
-                            @foreach ($charts as $chart)
-                                <div class="flex items-center justify-between m-6 p-3">
-                                    <li>{{ $chart->user->lastname . ' ' . $chart->user->name . ' ' . $chart->user->dni }}</li>
-                                    <li><a class="bg-teal-500 rounded text-white p-2" href="{{ route('chart.show', $chart) }}">ver cartilla</a></li>
-                                </div>
-                            @endforeach
-                        </ul>
-                        {{$charts->links()}}
-                    @endif
                 </div>
             </div>
         </div>

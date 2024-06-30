@@ -17,11 +17,17 @@ return new class extends Migration
             $table->string('lastname',length:30);
             $table->string('dni')->unique();
             $table->date('dob');
+            $table->string('phone');
+            $table->string('insurance')->nullable();
+            $table->string('plan')->nulleble();
+            $table->string('member_id')->nullable();
+            $table->string('license')->nullable();
+            $table->string('specialty')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('role',['patient','director','provider','secretary'])->default('patient');
+            $table->string('role');
             $table->timestamps();
         });
 

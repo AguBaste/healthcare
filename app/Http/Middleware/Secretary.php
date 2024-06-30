@@ -18,6 +18,7 @@ class Secretary
         if($request->user()->role ==='secretary'){
         return $next($request);
         }
-        dd('no tienes autorización para ver este contenido, por favor vete de aquí.');
+        // dd('no tienes autorización para ver este contenido, por favor vete de aquí.');
+          return redirect(route('error'));
     }
 }

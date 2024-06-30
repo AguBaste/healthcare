@@ -31,7 +31,7 @@ class AppointmentController extends Controller
         
                 break;
             case 'provider':
-                $provider =  auth()->user()->provider[0]->id;
+                $provider =  auth()->user()->id;
                 $appointments = Appointment::where('provider_id',$provider)->get();
                 foreach($appointments as $event){
                     $events[] = [

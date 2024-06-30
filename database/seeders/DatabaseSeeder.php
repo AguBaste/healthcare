@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Specialty;
 use App\Models\Diagnostic;
-use App\Models\Insurance;
 use App\Models\Alergy;
-use App\Models\Provider;
 use App\Models\Schedule;
 use App\Models\Appointment;
 
@@ -28,42 +25,45 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
   
-        Specialty::factory()->create([
-            'description'=>'nuerocirujano'
-        ]);
-        Insurance::factory()->create([
-           'description' => 'dosep'
-        ]);
-        Insurance::factory()->create([
-           'description' => 'osde'
-        ]);
-        Insurance::factory()->create([
-           'description' => 'pami'
-        ]);
-        Insurance::factory()->create([
-           'description' => 'swiss medical'
-        ]);
-        Insurance::factory()->create([
-           'description' => 'osfatum'
-        ]);
        
         User::factory()->create([
             'name' => 'agustín',
             'lastname'=>'basterrica',
             'dob'=>'1986/09/01',
+            'phone'=>2664331306,
+            'insurance'=>'dosep',
+            'plan'=>'basico',
+            'member_id'=>'32378366',
             'dni'=>'32378366',
             'role'=>'secretary',
-            'password'=>'sprinter413',
+            'password'=>'123456789',
             'email' => 'agustinbasterrica@hotmail.com',
         ]);
          User::factory()->create([
             'name' => 'aida',
             'lastname'=>'bianconi',
             'dob'=>'1965/01/27',
+            'phone'=>26645443232,
+            'insurance'=>'pami',
+            'plan'=>'A354Z',
+            'member_id'=>'451264',
             'dni'=>'11615518',
             'role'=>'patient',
-            'password'=>'sprinter413',
+            'password'=>'123456789',
             'email' => 'aidabianconi@hotmail.com',
+        ]);
+        User::create([
+            'name' => 'carolina',
+            'lastname'=>'quiroga',
+            'dob'=>'1992/12/09',
+            'phone'=>2657639227,
+            'insurance'=>'dosep',
+            'plan'=>'A354Z',
+            'member_id'=>'37090163',
+            'dni'=>'37091163',
+            'role'=>'patient',
+            'password'=>'123456789',
+            'email' => 'caro_09_28@hotmail.com',
         ]);
          User::factory()->create([
             'name' => 'enzo',
@@ -71,51 +71,29 @@ class DatabaseSeeder extends Seeder
             'dob'=>'1975/01/12',
             'dni'=>'27090163',
             'role'=>'provider',
-            'password'=>'sprinter413',
+            'insurance'=>'swiss medical',
+            'plan'=>'SG8080',
+            'member_id'=>'S354267',
+            'phone'=>26646598754,
+            'license'=>'445685',
+            'specialty'=>'neurocirujano',
+            'password'=>'123456789',
             'email' => 'enzorottino@hotmail.com',
         ]);
         User::factory()->create([
-                    'name' => 'lorenzo',
-                    'lastname'=>'enrique',
-                    'dob'=>'1975/01/12',
-                    'dni'=>'27090162',
-                    'role'=>'provider',
-                    'password'=>'sprinter413',
-                    'email' => 'lorenzoenrique@hotmail.com',
-                ]);
-        Provider::factory()->create([
-            'licence'=>'268642',
-            'user_id'=>4,
-            'specialty_id'=>1
-        ]);        
-        Provider::factory()->create([
-            'licence'=>'258642',
-            'user_id'=>3,
-            'specialty_id'=>1
-        ]);
-        Schedule::factory()->create([
-            'day'=>'lunes',
-            'start'=>'8:00:00',
-            'end'=>'16:00:00',
-            'break_start'=>'12:00:00',
-            'break_end'=>'13:00:00',
-            'provider_id'=>3
-        ]);
-         Schedule::factory()->create([
-            'day'=>'martes',
-            'start'=>'8:00:00',
-            'end'=>'16:00:00',
-            'break_start'=>'12:00:00',
-            'break_end'=>'13:00:00',
-            'provider_id'=>3
-        ]);
-         Schedule::factory()->create([
-            'day'=>'miercoles',
-            'start'=>'8:00:00',
-            'end'=>'16:00:00',
-            'break_start'=>'12:00:00',
-            'break_end'=>'13:00:00',
-            'provider_id'=>3
+            'name' => 'manuel',
+            'lastname'=>'lorenzo',
+            'dob'=>'1975/01/12',
+            'dni'=>'27890162',
+            'phone'=>2667451256,
+            'insurance'=>'medifé',
+            'plan'=>'platino',
+            'member_id'=>'P7845',
+            'license'=>'7845452',
+            'specialty'=>'cirujano',
+            'role'=>'provider',
+            'password'=>'123456789',
+            'email' => 'manuellorenzo@hotmail.com',
         ]);
     }
 }

@@ -9,13 +9,8 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AlergyController;
 use App\Http\Controllers\UsersAlergyController;
-use App\Http\Controllers\DiagnosticController;
 use App\Http\Controllers\PrescriptionController;
-
-
-
-
-
+use App\Http\Controllers\PatientController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -24,16 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
-
-
-
-
-
-
 Route::middleware(['auth'])->group(function () {
 
+Route::get('/error',function(){
+    return view('error');
+})->name('error');
 
 Route::get('/directorDash', function () {
     return view('directorDash');
@@ -61,9 +51,9 @@ Route::get('/dashboard', function () {
     Route::resource('appointment',AppointmentController::class);
     Route::resource('schedule',ScheduleController::class);
     Route::resource('alergy',AlergyController::class);
-    Route::resource('diagnostic',DiagnosticController::class)->middleware('provider');
     Route::resource('prescription',PrescriptionController::class)->middleware('provider');
     Route::resource('provider',ProviderController::class);
+    Route::resource('patient',PatientController::class)->middleware('secretary');
 
 });
 

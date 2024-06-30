@@ -16,7 +16,10 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        //
+        $prescriptions = Prescription::where('provider_id',auth()->user()->id)
+        ->orderBy('date','desc')
+        ->paginate(5);
+        return view('prescription.index',compact('prescriptions'));
     }
 
     /**
@@ -35,31 +38,20 @@ class PrescriptionController extends Controller
     {
         
         $request->validate([
-            'patient_id'=> 'required',
+            'user_id'=> 'required',
             'date'=>'required',
             'formula'=>'required',
             'dosis'=>'required',    
             'diagnostic'=>'required'
         ]);
-        $patient = User::where('id',$request->patient_id)->first();
-        $insurance = Chart::where('user_id',$patient->id)->first();
-
+        
         $prescription = Prescription::create([
             'formula' =>$request->formula,
             'dosis'=>$request->dosis,
             'diagnostic'=>$request->diagnostic,
             'date'=>$request->date,
-            'provider_id'=> auth()->user()->provider[0]->id,
-            'patient'=>$patient->lastname .' '.$patient->name .' '.$patient->dni,
-            'insurance'=>$insurance->insurance->description .' '. $insurance->member_id
-        ]);
-    
-        Diagnostic::create([
-            'treatment'=>$request->formula.' '.$request->dosis,
-            'user_id'=> $request->patient_id,
-            'provider_id'=>auth()->user()->provider[0]->id,
-            'description'=>$request->diagnostic,
-            'date'=>$request->date
+            'provider_id'=> auth()->user()->id,
+            'user_id'=>$request->user_id
         ]);
 
         return redirect(route('prescription.show',compact('prescription')))->with('status','receta generada exitosamente');
@@ -70,7 +62,8 @@ class PrescriptionController extends Controller
      */
     public function show(Prescription $prescription)
     {
-        return view('prescription.show',compact('prescription'));
+        $provider = User::where('id',$prescription->provider_id)->first();
+        return view('prescription.show',compact('prescription','provider'));
     }
 
     /**
@@ -78,7 +71,8 @@ class PrescriptionController extends Controller
      */
     public function edit(Prescription $prescription)
     {
-        //
+        $patients = User::where('role', 'patient')->orderBy('lastname','desc')->get();
+        return view('prescription.edit',compact('prescription','patients'));
     }
 
     /**
@@ -86,7 +80,22 @@ class PrescriptionController extends Controller
      */
     public function update(Request $request, Prescription $prescription)
     {
-        //
+         $request->validate([
+            'user_id'=> 'required',
+            'date'=>'required',
+            'formula'=>'required',
+            'dosis'=>'required',    
+            'diagnostic'=>'required'
+        ]);
+
+        $prescription->user_id = $request->user_id;
+        $prescription->date = $request->date;
+        $prescription->formula = $request->formula;
+        $prescription->dosis = $request->dosis;
+        $prescription->diagnostic = $request->diagnostic;
+        $prescription->provider_id = auth()->user()->id;
+        $prescription->update();
+        return redirect(route('prescription.index'))->with('status','receta actualizada exitosamente');
     }
 
     /**

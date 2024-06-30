@@ -6,7 +6,7 @@
                     <form method="POST" action="{{ route('chart.store') }}">
                          @csrf
 
-                         <!-- blood sugar level -->
+                         <!-- patient -->
                          <div>
                              <x-input-label for="user_id" value="paciente" />
                              <select name="user_id" required>
@@ -15,24 +15,6 @@
                                 @endforeach
                              </select>
                              <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
-                         </div>
-
-                         <!-- insurance -->
-                         <div class="mt-4">
-                             <x-input-label for="insurance" value="obra social" />
-                             <select name="insurance">
-                                @foreach ($insurances as $insurance)
-                                    <option value="{{$insurance->id}}"{{$insurance->description == 'ninguna' ? 'selected' : ''}}>{{$insurance->description}}</option>
-                                @endforeach
-                             </select>
-                             <x-input-error :messages="$errors->get('insurance')" class="mt-2" />
-                         </div>
-
-                         <!-- member_id -->
-                         <div class="mt-4">
-                             <x-input-label for="member_id" value="número de socio" />
-                             <x-text-input class="block mt-1 w-full" type="text" name="member_id"/>
-                             <x-input-error :messages="$errors->get('member_id')" class="mt-2" />
                          </div>
 
                          <!-- weight -->

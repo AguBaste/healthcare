@@ -13,8 +13,7 @@ class Prescription extends Model
     ];
     protected $fillable = [
         'dosis',
-        'patient',
-        'insurance',
+        'user_id',
         'provider_id',
         'formula',
         'diagnostic',
@@ -22,8 +21,5 @@ class Prescription extends Model
     ];
     public function user(){
         return $this->belongsTo(User::class);
-    }
-    public function provider(){
-        return $this->belongsTo(Provider::class);
     }
 }

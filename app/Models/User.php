@@ -20,6 +20,12 @@ class User extends Authenticatable
         'name',
         'lastname',
         'dob',
+        'phone',
+        'insurance',
+        'license',
+        'specialty',
+        'plan',
+        'member_id',
         'dni',
         'role',
         'email',
@@ -68,9 +74,6 @@ class User extends Authenticatable
     }
     public function diagnostic(){
         return $this->hasMany(Diagnostic::class);
-    }
-    public function provider(){
-        return $this->hasMany(Provider::class);
     }
     public function prescription(){
         return $this->hasMany(Prescription::class);

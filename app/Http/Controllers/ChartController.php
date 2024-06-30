@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chart;
-use App\Models\Treatment;
+use App\Models\Prescription;
 use App\Models\Diagnostic;
 use App\Models\User;
-use App\Models\Insurance;
 
 
 use Illuminate\Http\Request;
@@ -18,9 +17,22 @@ class ChartController extends Controller
      */
     public function index()
     {   
-        $chart = Chart::where('user_id',auth()->user()->id)->first();
-        $diagnostics = Diagnostic::where('user_id',auth()->user()->id)->get();
-        return view('chart.index',compact('chart','diagnostics'));
+        switch (auth()->user()->role) {
+            case 'patient':
+                $prescriptions = Prescription::where('user_id',auth()->user()->id)->get();
+                $chart = Chart::with('user')->where('user_id',auth()->user()->id)->first();
+                return view('chart.index',compact('chart','prescriptions'));
+                break;
+            case 'provider':
+                $charts = Chart::with('user')
+                ->paginate(5);
+                return view('chart.index',compact('charts'));
+            default:
+                # code...
+                break;
+        }
+        
+        return view('chart.index');
     }
 
     /**
@@ -29,8 +41,7 @@ class ChartController extends Controller
     public function create()
     {
         $patients = User::where('role','patient')->get();
-        $insurances = Insurance::orderBy('description','desc')->get();
-        return view('chart.create',compact('patients','insurances'));
+        return view('chart.create',compact('patients'));
     }
 
     /**
@@ -43,7 +54,6 @@ class ChartController extends Controller
             'smoke'=>'required',
             'glasses'=>'required',
             'user_id'=>'required',
-            'insurance'=>'required',
             'height'=>'required',
             'weight'=>'required'
         ]);
@@ -52,12 +62,19 @@ class ChartController extends Controller
        Chart::create([
             'height'=>floatval($request->height),
             'weight'=>floatval($request->weight),
-            'member_id'=>$request->member_id,
             'smoke'=>$request->smoke,
             'glasses'=>$request->glasses,
             'user_id'=>$request->user_id,
-            'insurance_id'=>$request->insurance 
         ]);
+        // aca segun el rol tengo que desviar secretaryDash o providerDash
+        if (auth()->user()->role == 'provider') {
+            return redirect(route('providerDash'))->with('status','cartilla creada exitosamente');
+        } else {
+            if(auth()->user()->role == 'secretary'){
+                return redirect(route('secretaryDash'))->with('status','cartilla creada exitosamente');
+            }
+        }
+        
         return redirect(route('providerDash'))->with('status','cartilla creada exitosamente');
     }
 
@@ -66,7 +83,8 @@ class ChartController extends Controller
      */
     public function show(Chart $chart)
     {
-        //
+        $prescriptions = Prescription::where('user_id',$chart->user->id)->get();
+        return view('chart.show',compact('chart','prescriptions'));
     }
 
     /**

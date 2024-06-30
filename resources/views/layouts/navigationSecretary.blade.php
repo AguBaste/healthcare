@@ -12,11 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('chart.index.index')">
+                    <x-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                         ver turnos
                     </x-nav-link>
-                    <x-nav-link :href="route('provider.index')" :active="request()->routeIs('chart.index.index')">
+                    <x-nav-link :href="route('provider.index')" :active="request()->routeIs('provider.index')">
                         info doctores
+                    </x-nav-link>
+                    <x-nav-link :href="route('patient.create')" :active="request()->routeIs('patient.create')">
+                        alta paciente
                     </x-nav-link>
                 </div>
             </div>
