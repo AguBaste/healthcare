@@ -6,7 +6,8 @@ php artisan key:generate
 agregar un estado a la cita que el medico va a poder cambiar 
 *arreglar el quilombo de vista que tengo
     -mas o menos esta
-*revisar la receta tengo nombre apellido y dni todo junto vero como sacar ese info de las tablas  
+
 
 *el calendario no sirve tengo que poder editar las citas por lo menos con la secretaria
+*dar de baja al paciente 
 
