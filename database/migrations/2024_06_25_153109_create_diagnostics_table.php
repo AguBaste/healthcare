@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('diagnostics', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->string('treatment');
+            $table->date('date');
             $table->foreignId('user_id')->cascade();
             $table->foreignId('provider_id')->cascade();
             $table->timestamps();

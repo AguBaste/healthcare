@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chart;
+use App\Models\Treatment;
+use App\Models\Diagnostic;
 use App\Models\User;
 use App\Models\Insurance;
 
@@ -17,7 +19,8 @@ class ChartController extends Controller
     public function index()
     {   
         $chart = Chart::where('user_id',auth()->user()->id)->first();
-        return view('chart.index',compact('chart'));
+        $diagnostics = Diagnostic::where('user_id',auth()->user()->id)->get();
+        return view('chart.index',compact('chart','diagnostics'));
     }
 
     /**
@@ -55,7 +58,7 @@ class ChartController extends Controller
             'user_id'=>$request->user_id,
             'insurance_id'=>$request->insurance 
         ]);
-        return redirect(route('provider'))->with('status','cartilla creada exitosamente');
+        return redirect(route('providerDash'))->with('status','cartilla creada exitosamente');
     }
 
     /**

@@ -19,6 +19,13 @@
                         <p>peso -> {{$chart->weight}}</p>
                         <p>fuma -> {{$chart->smoke}}</p>
                         <p>anteojos -> {{$chart->glasses}}</p>
+                        <h2 class="text-lg">diagnosticos</h2>
+                        @foreach ($diagnostics as $diagnostic)
+                            <p>{{$diagnostic->description}}</p>
+                            <h2 class="text-lg">tratamiento</h2>
+                            <p>{{$diagnostic->treatment}}</p>
+                            <p>fecha de comienzo del tratamiento {{$diagnostic->date->format('d-m-Y')}}</p>
+                        @endforeach
                     @endif
                 </div>
             </div>

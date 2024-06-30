@@ -7,13 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Diagnostic extends Model
 {
+    protected $casts = [
+        'date'=>'date'
+    ];
     protected $fillable = [
         'description',
         'provider_id',
-        'user_id'
+        'user_id',
+        'date',
+        'treatment'
     ];
     use HasFactory;
     public function user(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
+    }
+    public function provider(){
+        return $this->belongsTo(Provider::class);
     }
 }

@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Alergy::class);
     }
     public function diagnostic(){
-        return $this->belongsToMany(Diagnostic::class);
+        return $this->hasMany(Diagnostic::class);
     }
     public function provider(){
         return $this->hasMany(Provider::class);

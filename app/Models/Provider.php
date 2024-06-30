@@ -23,4 +23,7 @@ class Provider extends Model
     public function prescription(){
         return $this->hasMany(Prescription::class);
     }
+    public function diagnostic(){
+        return $this->hasMany(Diagnostic::class);
+    }
 }

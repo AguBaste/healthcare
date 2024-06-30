@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescription;
 use App\Models\Diagnostic;
-use App\Models\Treatment;
 use App\Models\User;
+use App\Models\Chart;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -33,6 +33,7 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'patient_id'=> 'required',
             'date'=>'required',
@@ -40,26 +41,28 @@ class PrescriptionController extends Controller
             'dosis'=>'required',    
             'diagnostic'=>'required'
         ]);
-        Prescription::create([
+        $patient = User::where('id',$request->patient_id)->first();
+        $insurance = Chart::where('user_id',$patient->id)->first();
+
+        $prescription = Prescription::create([
             'formula' =>$request->formula,
             'dosis'=>$request->dosis,
             'diagnostic'=>$request->diagnostic,
             'date'=>$request->date,
             'provider_id'=> auth()->user()->provider[0]->id,
-            'user_id'=>$request->patient_id
+            'patient'=>$patient->lastname .' '.$patient->name .' '.$patient->dni,
+            'insurance'=>$insurance->insurance->description .' '. $insurance->member_id
         ]);
-        Treatment::create([
-            'description'=>$request->formula.' '.$request->dosis,
-            'start_date'=>$request->date,
-            'provider_id'=>auth()->user()->provider[0]->id,
-            'user_id'=>$request->patient_id,
-        ]);
+    
         Diagnostic::create([
+            'treatment'=>$request->formula.' '.$request->dosis,
             'user_id'=> $request->patient_id,
             'provider_id'=>auth()->user()->provider[0]->id,
-            'description'=>$request->diagnostic
+            'description'=>$request->diagnostic,
+            'date'=>$request->date
         ]);
-        return redirect(route('prescription.create'))->with('status','receta generada exitosamente');
+
+        return redirect(route('prescription.show',compact('prescription')))->with('status','receta generada exitosamente');
     }
 
     /**
@@ -67,7 +70,7 @@ class PrescriptionController extends Controller
      */
     public function show(Prescription $prescription)
     {
-        //
+        return view('prescription.show',compact('prescription'));
     }
 
     /**

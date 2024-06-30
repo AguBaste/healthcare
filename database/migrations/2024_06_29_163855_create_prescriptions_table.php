@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('diagnostic');
             $table->date('date');
             $table->foreignId('provider_id')->cascade();
-            $table->foreignId('user_id')->cascade();
+            $table->string('patient');
+            $table->string('insurance');
             $table->timestamps();
         });
     }
