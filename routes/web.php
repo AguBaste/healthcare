@@ -63,7 +63,7 @@ Route::get('/dashboard', function () {
     Route::resource('alergy',AlergyController::class);
     Route::resource('diagnostic',DiagnosticController::class)->middleware('provider');
     Route::resource('prescription',PrescriptionController::class)->middleware('provider');
-    Route::resource('provider',ProviderController::class)->middleware('provider');
+    Route::resource('provider',ProviderController::class);
 
 });
 
