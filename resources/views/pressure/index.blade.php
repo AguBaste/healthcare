@@ -1,12 +1,17 @@
 <x-app-layout>
-
+ <x-slot name="header">
+         <h2 class="capitalize font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+             presión arterial
+         </h2>
+     </x-slot>
     {{-- create button --}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white text-center dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <a class="bg-teal-500 rounded p-2 text-white" href="{{ route('pressure.create') }}">registrar nueva medición</a>
-
+                    <x-primary-a href="{{ route('pressure.create') }}">
+                         nueva medición arterial
+                    </x-primary-a>
                 </div>
             </div>
         </div>
@@ -30,12 +35,16 @@
                         @if ($pressure->created_at != $pressure->updated_at)
                             <p>editado {{$pressure->updated_at->diffForHumans()}}</p>
                         @endif
-                        <a class="bg-teal-200" href="{{ route('pressure.edit', $pressure) }}">editar</a>
-                        <form action="{{ route('pressure.destroy', $pressure) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button class="bg-red-200" type="submit">eliminar</a>
-                        </form>
+                        <div class="flex w-auto justify-start gap-5 mt-4">
+                            <x-primary-a href="{{ route('pressure.edit', $pressure) }}">
+                                editar
+                            </x-primary-a>
+                            <form action="{{ route('pressure.destroy', $pressure) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <x-button-delete href="{{ route('pressure.destroy', $pressure) }}">
+                                </x-button-delete>
+                        </div>
                     </div>
                 </div>
             </div>

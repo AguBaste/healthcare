@@ -16,10 +16,10 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        $prescriptions = Prescription::where('provider_id',auth()->user()->id)
-        ->orderBy('date','desc')
-        ->paginate(5);
-        return view('prescription.index',compact('prescriptions'));
+        $patients = User::where('role','patient')
+        ->orderBy('lastname','asc')
+        ->get();
+        return view('prescription.index',compact('patients'));
     }
 
     /**
@@ -66,6 +66,10 @@ class PrescriptionController extends Controller
         return view('prescription.show',compact('prescription','provider'));
     }
 
+    public function search(Request $request){
+        $prescriptions = Prescription::where('user_id', $request->user_id)->orderBy('date','asc')->paginate(5);
+        return view('prescription.search',compact('prescriptions'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

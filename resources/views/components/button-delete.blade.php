@@ -1,0 +1,1 @@
+<a {{$attributes->merge(['class'=>'inline-flex bg-red-500 rounded shadow-xl text-white p-2','href'=>'','onClick'=>'event.preventDefault();this.closest("form").submit();'])}}>borrar</a>

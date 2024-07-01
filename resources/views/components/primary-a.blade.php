@@ -1,0 +1,1 @@
+<a {{$attributes->merge(['class'=>'inline-flex bg-teal-500 rounded shadow-xl text-white p-2 uppercase','href'=>''])}}>{{$slot}}</a>

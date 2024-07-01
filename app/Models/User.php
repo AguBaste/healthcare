@@ -72,11 +72,11 @@ class User extends Authenticatable
     public function alergy(){
         return $this->belongsToMany(Alergy::class);
     }
-    public function diagnostic(){
-        return $this->hasMany(Diagnostic::class);
-    }
     public function prescription(){
         return $this->hasMany(Prescription::class);
+    }
+    public function order(){
+        return $this->hasMany(Order::class);
     }
     
 }

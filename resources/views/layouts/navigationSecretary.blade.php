@@ -110,8 +110,3 @@
         </div>
     </div>
 </nav>
-@if(session('status'))
-    <div class="bg-green-500 text-center p-4 text-white">
-        {{ session('status') }}
-    </div>
-@endif

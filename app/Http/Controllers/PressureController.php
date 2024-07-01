@@ -94,6 +94,7 @@ class PressureController extends Controller
      */
     public function destroy(Pressure $pressure)
     {
-        //
+        $pressure->delete();
+        return redirect(route('pressure.index'))->with('status','medición borrada exitosamente');
     }
 }

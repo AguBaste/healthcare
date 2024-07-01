@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Prescription extends Model
+class Order extends Model
 {
     use HasFactory;
     protected $casts = [
-        'date'=> 'date'
+        'date'=>'date' 
     ];
     protected $fillable = [
-        'dosis',
+        'date',
         'user_id',
         'provider_id',
-        'formula',
         'diagnostic',
-        'date'
+        'study'
     ];
     public function user(){
         return $this->belongsTo(User::class);
     }
-
 }

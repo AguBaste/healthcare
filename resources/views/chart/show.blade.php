@@ -1,4 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="capitalize font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            historial médico
+        </h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,7 +28,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h1 class="upperase text-3xl text-center m-4">diagnosticos</h1>
+                        <h1 class="capitalize text-3xl text-center m-4">diagnosticos</h1>
                         <table class="table-auto w-full text-center">
                             <thead>
                                 <tr>

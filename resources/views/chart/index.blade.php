@@ -1,5 +1,9 @@
 <x-app-layout>
-
+ <x-slot name="header">
+         <h2 class="capitalize font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+             historial médico
+         </h2>
+     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -55,13 +59,13 @@
                         @endif
                     @elseif (auth()->user()->role == 'provider')
                         <div class="text-center">
-                            <a class="bg-teal-500 rounded p-2 text-white uppercase" href="{{route('chart.create')}}">crear nueva cartilla</a>
+                            <x-primary-a href="{{route('chart.create')}}">crear nueva cartilla</x-primary-a>
                         </div>
                         <ul>
                             @foreach ($charts as $chart)
                                 <div class="flex items-center justify-between m-6 p-3">
                                     <li class="capitalize font-bold">{{ $chart->user->lastname . ' ' . $chart->user->name . ' ' . $chart->user->dni }}</li>
-                                    <li><a class="bg-teal-500 rounded text-white p-2 uppercase" href="{{ route('chart.show', $chart) }}">ver cartilla</a></li>
+                                    <li><x-primary-a href="{{ route('chart.show', $chart) }}">ver cartilla</x-primary-a></li>
                                 </div>
                             @endforeach
                         </ul>

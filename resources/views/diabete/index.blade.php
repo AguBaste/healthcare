@@ -5,8 +5,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white text-center dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-center">
-                    <a class="bg-teal-500 rounded p-2 text-white" href="{{ route('diabete.create') }}">anotar nueva medición de diabetes</a>
-
+                    <x-primary-a href="{{ route('diabete.create') }}">
+                        nueva medición de diabetes
+                    </x-primary-a>
                 </div>
             </div>
         </div>
@@ -21,18 +22,24 @@
                         <p>fecha {{ $diabete->date->format('d-m-Y') }} hora {{ $diabete->time }}</p>
                         <p>azúcar en sangre {{ $diabete->bsl }}</p>
                         @if ($diabete->comment != null)
-                            <p>comentarios {{ $diabete->comment}}</p> 
-                            @else                           
+                            <p>comentarios {{ $diabete->comment }}</p>
+                        @else
                             <p>sin comentarios</p>
                         @endif
                         @if ($diabete->created_at != $diabete->updated_at)
-                            <p>editado {{$diabete->updated_at->diffForHumans()}}</p>
+                            <p>editado {{ $diabete->updated_at->diffForHumans() }}</p>
                         @endif
-                        <a class="bg-teal-200" href="{{ route('diabete.edit', $diabete) }}">editar</a>
-                        <form action="{{ route('diabete.destroy', $diabete) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button class="bg-red-200" type="submit">eliminar</a>
+                        <div class="flex w-auto justify-start gap-5 mt-4">
+                            <x-primary-a href="{{ route('diabete.edit', $diabete) }}">
+                                editar
+                            </x-primary-a>
+                            <form action="{{ route('diabete.destroy', $diabete) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <x-button-delete  href="{{ route('diabete.destroy', $diabete) }}">
+                                </x-button-delete>
+                        </div>
+
                         </form>
                     </div>
                 </div>

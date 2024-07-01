@@ -15,11 +15,14 @@
                     <x-nav-link  :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                         mis turnos
                     </x-nav-link>
-                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+                    <x-nav-link :href="route('chart.index')" :active="request()->routeIs(['chart.index','chart.create','chart.show'])">
                         historial pacientes
                     </x-nav-link>
-                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs('prescription.index')">
+                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs(['prescription.index','prescription.create','prescription.edit'])">
                         receta
+                    </x-nav-link>
+                    <x-nav-link :href="route('order.index')" :active="request()->routeIs(['order.index','order.create','order.edit'])">
+                        orden
                     </x-nav-link>
                   <x-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" >
                         vademecum
@@ -79,11 +82,14 @@
             <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                 Mis Turnos
             </x-responsive-nav-link>
-          <x-responsive-nav-link :href="route('chart.index')" :active="request()->routeIs('chart.index')">
+          <x-responsive-nav-link :href="route('chart.index')" :active="request()->routeIs(['chart.index','chart.create','chart.show'])">
                 Cartilla
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('chart.create')" :active="request()->routeIs('chart.create')">
+            <x-responsive-nav-link :href="route('appointment.index')" :active="request()->routeIs('chart.create')">
                 Receta 
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('order.index')" :active="request()->routeIs(['order.index','order.create','order.edit','order.show'])">
+                Orden
             </x-responsive-nav-link>
             <x-responsive-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" :active="request()->routeIs('chart.create')">
                 Vademecum
@@ -116,8 +122,4 @@
         </div>
     </div>
 </nav>
-@if(session('status'))
-    <div class="bg-green-500 text-center p-4">
-        {{ session('status') }}
-    </div>
-@endif
+

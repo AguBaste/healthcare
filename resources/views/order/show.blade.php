@@ -60,17 +60,16 @@
         <li>Tel: 2664331306</li>
     </ul>
     <ul class="info-paciente">
-    <li>Paciente: <span>{{ $prescription->user->name . ' ' . $prescription->user->lastname }}</span></li>
-    <li>DNI: <span>{{ $prescription->user->dni }}</span> </li>
-    <li>Obra Social: <span>{{ $prescription->user->insurance }}</span> </li>
-    <li>Número de Afiliado: <span> {{ $prescription->user->member_id }}</span></li>
+    <li>Paciente: <span>{{ $order->user->name . ' ' . $order->user->lastname }}</span></li>
+    <li>DNI: <span>{{ $order->user->dni }}</span> </li>
+    <li>Obra Social: <span>{{ $order->user->insurance }}</span> </li>
+    <li>Número de Afiliado: <span> {{ $order->user->member_id }}</span></li>
 </ul>
 <ul class="lista">
-    <li class="item">fecha {{ $prescription->date->format('d-m-Y') }}</li>
+    <li class="item">fecha {{ $order->date->format('d-m-Y') }}</li>
     <li class="item">RP</li>
-    <li class="cursiva">{{ $prescription->formula }}</li>
-    <li class="cursiva">{{ $prescription->dosis }}</li>
-    <li class="cursiva"><span>diagnostico</span>{{ $prescription->diagnostic }}</li>
+    <li class="cursiva">{{ $order->study }}</li>
+    <li class="cursiva"><span>diagnostico</span> {{ $order->diagnostic }}</li>
 </ul>
 <ul class="info-clinica">
     <li>Dr: <span>{{ auth()->user()->name . ' ' . auth()->user()->lastname }}</span></li>  

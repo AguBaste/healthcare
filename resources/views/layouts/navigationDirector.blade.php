@@ -100,8 +100,4 @@
         </div>
     </div>
 </nav>
-@if(session('status'))
-    <div class="bg-green-500 text-center p-4">
-        {{ session('status') }}
-    </div>
-@endif
+

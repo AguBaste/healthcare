@@ -11,6 +11,8 @@ use App\Http\Controllers\AlergyController;
 use App\Http\Controllers\UsersAlergyController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\OrderController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -52,8 +54,11 @@ Route::get('/dashboard', function () {
     Route::resource('schedule',ScheduleController::class);
     Route::resource('alergy',AlergyController::class);
     Route::resource('prescription',PrescriptionController::class)->middleware('provider');
+    Route::post('prescription/paciente',[PrescriptionController::class,'search'])->middleware('provider')->name('prescription.search');
     Route::resource('provider',ProviderController::class);
     Route::resource('patient',PatientController::class)->middleware('secretary');
+    Route::resource('order',OrderController::class)->middleware('provider');
+    Route::post('order/paciente',[OrderController::class,'search'])->middleware('provider')->name('order.search');
 
 });
 
