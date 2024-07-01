@@ -76,7 +76,12 @@
             <x-responsive-nav-link class="capitalize" :href="route('appointment.index')" :active="request()->routeIs('appointment.index')">
                 ver turnos
             </x-responsive-nav-link>
-           
+           <x-responsive-nav-link class="capitalize" :href="route('provider.index')" :active="request()->routeIs('provider.index')">
+                info doctores
+            </x-responsive-nav-link>
+            <x-responsive-nav-link class="capitalize" :href="route('patient.create')" :active="request()->routeIs('patient.create')">
+                alta paciente
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -106,7 +111,7 @@
     </div>
 </nav>
 @if(session('status'))
-    <div class="bg-green-500 text-center p-4">
+    <div class="bg-green-500 text-center p-4 text-white">
         {{ session('status') }}
     </div>
 @endif

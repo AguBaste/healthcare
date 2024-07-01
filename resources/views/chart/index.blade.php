@@ -55,13 +55,13 @@
                         @endif
                     @elseif (auth()->user()->role == 'provider')
                         <div class="text-center">
-                            <a class="bg-teal-500 rounded p-2 text-white" href="{{route('chart.create')}}">crear nueva cartilla</a>
+                            <a class="bg-teal-500 rounded p-2 text-white uppercase" href="{{route('chart.create')}}">crear nueva cartilla</a>
                         </div>
                         <ul>
                             @foreach ($charts as $chart)
                                 <div class="flex items-center justify-between m-6 p-3">
-                                    <li>{{ $chart->user->lastname . ' ' . $chart->user->name . ' ' . $chart->user->dni }}</li>
-                                    <li><a class="bg-teal-500 rounded text-white p-2" href="{{ route('chart.show', $chart) }}">ver cartilla</a></li>
+                                    <li class="capitalize font-bold">{{ $chart->user->lastname . ' ' . $chart->user->name . ' ' . $chart->user->dni }}</li>
+                                    <li><a class="bg-teal-500 rounded text-white p-2 uppercase" href="{{ route('chart.show', $chart) }}">ver cartilla</a></li>
                                 </div>
                             @endforeach
                         </ul>
