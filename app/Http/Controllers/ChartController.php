@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chart;
 use App\Models\Prescription;
+use App\Models\Appointment;
 use App\Models\Diagnostic;
 use App\Models\User;
 
@@ -38,15 +39,21 @@ class ChartController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $patient)
     {
-        $patients = User::where('role','patient')->get();
-        return view('chart.create',compact('patients'));
+        
+        return view('chart.create',compact('patient'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    public function onlyChart(Request $request){
+       
+        $patient = User::where('id',$request->id)->first();
+    
+        return view('chart.create',compact('patient'));
+    }
     public function store(Request $request)
     {
        
@@ -59,7 +66,7 @@ class ChartController extends Controller
         ]);
  
        
-       Chart::create([
+        $chart = Chart::create([
             'height'=>floatval($request->height),
             'weight'=>floatval($request->weight),
             'smoke'=>$request->smoke,
@@ -68,7 +75,9 @@ class ChartController extends Controller
         ]);
         // aca segun el rol tengo que desviar secretaryDash o providerDash
         if (auth()->user()->role == 'provider') {
-            return redirect(route('providerDash'))->with('status','cartilla creada exitosamente');
+            $date = date('Y-m-d');
+            $appointment = Appointment::where('user_id',$chart->user_id)->where('date',$date)->first();
+            return redirect(route('appointment.show',compact('appointment')))->with('status','cartilla creada exitosamente');
         } else {
             if(auth()->user()->role == 'secretary'){
                 return redirect(route('secretaryDash'))->with('status','cartilla creada exitosamente');

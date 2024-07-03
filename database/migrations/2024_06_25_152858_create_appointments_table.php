@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->datetime('date');
+            $table->date('date');
+            $table->time('time');
+            $table->string('status');
             $table->foreignId('provider_id')->cascade();
             $table->foreignId('user_id')->cascade();
             $table->timestamps();

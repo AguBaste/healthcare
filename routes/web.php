@@ -48,16 +48,19 @@ Route::get('/dashboard', function () {
 
     //rutas mias
     Route::resource('chart',ChartController::class);
+    Route::post('chart/onlyChart',[ChartController::class,'onlyChart'])->middleware('provider')->name('chart.onlyChart');
     Route::resource('diabete',DiabeteController::class);
     Route::resource('pressure',PressureController::class);
     Route::resource('appointment',AppointmentController::class);
     Route::resource('schedule',ScheduleController::class);
     Route::resource('alergy',AlergyController::class);
     Route::resource('prescription',PrescriptionController::class)->middleware('provider');
+    Route::post('prescription/onlyPrescription',[PrescriptionController::class,'onlyPrescription'])->middleware(['provider'])->name('prescription.onlyPrescription');
     Route::post('prescription/paciente',[PrescriptionController::class,'search'])->middleware('provider')->name('prescription.search');
     Route::resource('provider',ProviderController::class);
     Route::resource('patient',PatientController::class)->middleware('secretary');
-    Route::resource('order',OrderController::class)->middleware('provider');
+    Route::resource('order',OrderController::class)->middleware('provider');    
+    Route::post('order/onlyOrder',[OrderController::class,'onlyOrder'])->middleware(['provider','secretary'])->name('order.onlyOrder');
     Route::post('order/paciente',[OrderController::class,'search'])->middleware('provider')->name('order.search');
 
 });

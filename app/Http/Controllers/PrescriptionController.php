@@ -25,12 +25,17 @@ class PrescriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $patient)
     {
-        $patients = User::where('role','patient')->get();
+        $patients = User::where('role','patient')->orderBy('lastname','asc')->get();
         return view('prescription.create',compact('patients'));
     }
 
+    public function onlyPrescription(Request $request){
+        $patient =  User::find($request->user_id);
+        $patients = null;
+         return view('prescription.create',compact('patient','patients'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -67,8 +72,11 @@ class PrescriptionController extends Controller
     }
 
     public function search(Request $request){
+         $patients = User::where('role','patient')
+        ->orderBy('lastname','asc')
+        ->get();
         $prescriptions = Prescription::where('user_id', $request->user_id)->orderBy('date','asc')->paginate(5);
-        return view('prescription.search',compact('prescriptions'));
+        return view('prescription.search',compact('prescriptions','patients'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -99,7 +107,7 @@ class PrescriptionController extends Controller
         $prescription->diagnostic = $request->diagnostic;
         $prescription->provider_id = auth()->user()->id;
         $prescription->update();
-        return redirect(route('prescription.index'))->with('status','receta actualizada exitosamente');
+        return redirect(route('prescription.show',compact('prescription')))->with('status','receta actualizada exitosamente');
     }
 
     /**

@@ -18,10 +18,10 @@
                     <x-nav-link :href="route('chart.index')" :active="request()->routeIs(['chart.index','chart.create','chart.show'])">
                         historial pacientes
                     </x-nav-link>
-                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs(['prescription.index','prescription.create','prescription.edit'])">
+                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs(['prescription.index','prescription.create','prescription.search','prescription.edit','prescription.show'])">
                         receta
                     </x-nav-link>
-                    <x-nav-link :href="route('order.index')" :active="request()->routeIs(['order.index','order.create','order.edit'])">
+                    <x-nav-link :href="route('order.index')" :active="request()->routeIs(['order.index','order.create','order.edit','order.search','order.show'])">
                         orden
                     </x-nav-link>
                   <x-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" >

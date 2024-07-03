@@ -17,24 +17,33 @@
                               <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="text-center text-3xl m-4">Cartilla número {{ $chart->id }}</h1>
                     <div class="w-full">
-                        <table class="table-auto w-full text-center">
-                            <thead>
-                                <tr>
-                                    <th class="uppercase">paciente</th>
-                                    <th class="uppercase">dni</th>
-                                    <th class="uppercase">obra social</th>
-                                    <th class="uppercase">número de afiliado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="capitalize">{{ $chart->user->lastname . ' ' . $chart->user->name }}</td>
-                                    <td>{{ $chart->user->dni }}</td>
-                                    <td class="capitalize">{{ $chart->user->insurance }}</td>
-                                    <td>{{ $chart->user->member_id }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                       <table class="table-auto w-full text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="uppercase">nombre</th>
+                                        <th class="uppercase">dni</th>
+                                        <th class="uppercase">obra social</th>
+                                        <th class="uppercase">número de afiliado</th>
+                                        <th class="uppercase">altura</th>
+                                        <th class="uppercase">peso</th>
+                                        <th class="uppercase">lentes</th>
+                                        <th class="uppercase">fuma</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="capitalize">{{ $chart->user->lastname . ' ' . $chart->user->name }}
+                                        </td>
+                                        <td>{{ $chart->user->dni }}</td>
+                                        <td class="capitalize">{{ $chart->user->insurance }}</td>
+                                        <td>{{ $chart->user->member_id }}</td>
+                                        <td>{{ $chart->height }}mts</td>
+                                        <td>{{ $chart->weight }}kg</td>
+                                        <td>{{ $chart->glasses }}</td>
+                                        <td>{{ $chart->smoke }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         <h1 class="upperase text-3xl text-center m-4">diagnosticos</h1>
                         <table class="table-auto w-full text-center">
                             <thead>
@@ -58,9 +67,7 @@
                 </div>
                         @endif
                     @elseif (auth()->user()->role == 'provider')
-                        <div class="text-center">
-                            <x-primary-a href="{{route('chart.create')}}">crear nueva cartilla</x-primary-a>
-                        </div>
+                        
                         <ul>
                             @foreach ($charts as $chart)
                                 <div class="flex items-center justify-between m-6 p-3">

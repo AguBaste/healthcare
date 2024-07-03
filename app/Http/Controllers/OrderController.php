@@ -21,12 +21,17 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create(User $patient)
+    {   
         $patients = User::where('role','patient')->orderBy('lastname','asc')->get();
         return view('order.create',compact('patients'));
     }
 
+    public function onlyOrder(Request $request){
+        $patient = User::find($request->user_id);
+        $patients = null;
+        return view('order.create',compact('patient','patients'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -47,7 +52,7 @@ class OrderController extends Controller
             'provider_id'=>$provider_id,
             'user_id'=>$request->user_id
         ]);
-        return redirect(route('order.show',compact('order')));
+        return redirect(route('order.show',compact('order')))->with('status','orden generada exitosamente');
     }
 
     /**
@@ -71,7 +76,10 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $patients = User::where('role','patient')
+        ->orderBy('lastname','asc')
+        ->get();
+        return view('order.edit',compact('order','patients'));
     }
 
     /**
@@ -79,7 +87,19 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'user_id'=>'required',
+            'date'=>'required',
+            'diagnostic'=>'required',
+            'study'=>'required'
+        ]);
+        $order->date = $request->date;
+        $order->user_id = $request->user_id;
+        $order->study = $request->study;
+        $order->diagnostic = $request->diagnostic;
+        $order->provider_id = auth()->user()->id;
+        $order->update();
+        return redirect(route('order.show',compact('order')))->with('status','orden actualizada exitosamente');
     }
 
     /**

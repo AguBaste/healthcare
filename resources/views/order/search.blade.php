@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="capitalize font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            estudios
+           <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            @if ($orders[0] != null)
+               ordenes de <span class="capitalize">{{$orders[0]->user->lastname .' ' .$orders[0]->user->name}}</span>
+                @else
+                No hay de ordenes de este paciente
+            @endif
         </h2>
     </x-slot>
     <div class="py-12">

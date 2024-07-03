@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use App\Models\Provider;
+use App\Models\Prescription;
 use App\Models\User;
+use App\Models\Chart;
 use App\Models\Schedule;
 
 use Illuminate\Http\Request;
@@ -17,44 +18,30 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $events = [];
-        switch (auth()->user()->role) {
-            case 'patient':
-                $appointments = Appointment::where('user_id',auth()->user()->id)->get();
-                foreach($appointments as $event){
-                    $events[] = [
-                        'title'=> $event->provider->user->name .' '. $event->provider->user->lastname,
-                        'start'=>$event->date,
-                        'end'=>$event->date
-                    ];
-                }
-        
-                break;
-            case 'provider':
-                $provider =  auth()->user()->id;
-                $appointments = Appointment::where('provider_id',$provider)->get();
-                foreach($appointments as $event){
-                    $events[] = [
-                        'title'=> $event->user->name .' '. $event->user->lastname,
-                        'start'=>$event->date,
-                        'end'=>$event->date
-                    ];
-                }
-                break;
-            default://secretary
-                $appointments = Appointment::with('user','provider')->get();
-                foreach($appointments as $event){
-                    $events[] = [
-                        'title'=>$event->provider->user->name .' '.$event->provider->user->lastname,
-                        'start'=>$event->date,
-                        'end'=>$event->date
-                    ];
-                }
-                break;
+        if (auth()->user()->role ==='secretary') {
+            $appointments = Appointment::with('user')->get();
+            $events=[];
+            foreach ($appointments as $apo) {
+                $events[]=[
+                    'title'=>$apo->user->lastname,
+                    'start'=>$apo->date,
+                    'end'=>$apo->date,
+                    'url'=>'appointment/'.$apo->id.'/edit',
+                ];
+            }
+           
+            return view('appointment.index',compact('events'));
+        } else {
+            $date =  date('Y-m-d');
+        $appointments = Appointment::with('user')
+        ->where('provider_id', auth()->user()->id)
+        ->where('date',$date)
+        ->where('status','reservada')
+        ->get();
+        return view('appointment.index',compact('appointments'));
         }
         
-
-        return view('appointment.index',compact('events'));
+        
     }
 
     /**
@@ -62,8 +49,8 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        $providers = Provider::with('user','specialty')->get();
-        $patients = User::where('role','patient')->orderBy('lastname','desc')->get();
+        $providers = User::where('role','provider')->orderBy('lastname','asc')->get();
+        $patients = User::where('role','patient')->orderBy('lastname','asc')->get();
         return view('appointment.create',compact('providers','patients'));
     }
 
@@ -72,17 +59,18 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-       
         $request->validate([
             'date'=>'required',
             'time'=>'required',
             'provider_id'=>'required',
-            'patient_id'=>'required',
+            'user_id'=>'required',
         ]);
         Appointment::create([
-            'date'=>$request->date.' '.$request->time,
+            'date'=>$request->date,
+            'time'=>$request->time,
+            'status'=>'reservada',
             'provider_id'=>$request->provider_id,
-            'user_id'=>$request->patient_id,
+            'user_id'=>$request->user_id,
         ]);
         return redirect(route('appointment.index'))->with('status','cita agendada exitosamente');
     }
@@ -92,7 +80,10 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        //
+
+        $chart = Chart::with('user')->where('user_id',$appointment->user_id)->first();
+        $prescriptions = Prescription::where('user_id', $appointment->user->id)->get();
+        return view('appointment.show',compact('appointment','chart','prescriptions'));
     }
 
     /**
@@ -100,7 +91,8 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        $providers =  User::where('role','provider')->orderBy('lastname','asc')->get();
+        return view('appointment.edit',compact('appointment','providers'));
     }
 
     /**
@@ -108,12 +100,13 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        return $request;
-        $appointment->start_date = $request->start_date;
-        $appointment->end_date = $request->end_date;
-
+        
+        $appointment->status = $request->status;
+        $appointment->update();
+        return redirect(route('providerDash'))->with('status','has terminado una cita pasemos a la siguiente');
     }
 
+ 
     /**
      * Remove the specified resource from storage.
      */

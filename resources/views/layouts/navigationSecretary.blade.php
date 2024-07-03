@@ -18,6 +18,12 @@
                     <x-nav-link :href="route('provider.index')" :active="request()->routeIs('provider.index')">
                         info doctores
                     </x-nav-link>
+                     <x-nav-link :href="route('prescription.index')" :active="request()->routeIs('prescription.index')">
+                        recetas
+                    </x-nav-link>
+                     <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
+                        ordenes
+                    </x-nav-link>
                     <x-nav-link :href="route('patient.create')" :active="request()->routeIs('patient.create')">
                         alta paciente
                     </x-nav-link>
@@ -78,6 +84,12 @@
             </x-responsive-nav-link>
            <x-responsive-nav-link class="capitalize" :href="route('provider.index')" :active="request()->routeIs('provider.index')">
                 info doctores
+            </x-responsive-nav-link>
+             <x-responsive-nav-link class="capitalize" :href="route('prescription.index')" :active="request()->routeIs('prescription.index')">
+                recetas
+            </x-responsive-nav-link>
+             <x-responsive-nav-link class="capitalize" :href="route('order.index')" :active="request()->routeIs('order.index')">
+                ordenes
             </x-responsive-nav-link>
             <x-responsive-nav-link class="capitalize" :href="route('patient.create')" :active="request()->routeIs('patient.create')">
                 alta paciente

@@ -15,7 +15,7 @@ class Secretary
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->role ==='secretary'){
+        if($request->user()->role ==='secretary' || $request->user()->role ==='provider'){
         return $next($request);
         }
         // dd('no tienes autorización para ver este contenido, por favor vete de aquí.');

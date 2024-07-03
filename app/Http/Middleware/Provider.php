@@ -15,7 +15,7 @@ class Provider
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->role ==='provider'){
+        if($request->user()->role ==='provider' || $request->user()->role ==='secretary'){
         return $next($request);
         }
         // dd('no tienes autorización para ver este contenido, por favor vete de aquí.');

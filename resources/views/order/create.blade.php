@@ -6,15 +6,26 @@
                     <form class="capitalize" action="{{ route('order.store') }}" method="post">
                         @csrf
                         <!-- patient -->
-                         <div>
-                             <x-input-label for="user_id" value="paciente" />
-                             <select class="block mt-1 w-full" name="user_id">
-                                @foreach ($patients as $patient)
-                                    <option value="{{$patient->id}}">{{$patient->name .' '.$patient->lastname .' '. $patient->dni }}</option>
-                                @endforeach
-                             </select>
-                             <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
-                         </div>
+                        @if ($patients != null)
+                            <div>
+                                <x-input-label for="user_id" value="paciente" />
+                                <select class="capitalize block mt-1 w-full" name="user_id" id="">
+                                    @foreach ($patients as $patient)
+                                        <option value="{{$patient->id}}">{{ $patient->lastname .' '.$patient->name}}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('user_id')" class="mt-2"/>
+                            </div>
+                        @else
+                            <div>
+                                <x-input-label for="user_id" value="paciente" />
+                                <x-text-input class="block mt-1 w-full" type="text" readonly
+                                    value="{{ $patient->lastname }}" />
+                                <input type="hidden" name="user_id" value="{{ $patient->id }}" />
+                            </div>
+                        @endif
+
+
                         <!-- date -->
                         <div class="mt-4">
                             <x-input-label for="date" value="fecha" />
