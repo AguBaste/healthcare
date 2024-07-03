@@ -7,7 +7,7 @@ use App\Models\Prescription;
 use App\Models\User;
 use App\Models\Chart;
 use App\Models\Schedule;
-
+use DB;
 use Illuminate\Http\Request;
 
 
@@ -19,11 +19,15 @@ class AppointmentController extends Controller
     public function index()
     {
         if (auth()->user()->role ==='secretary') {
-            $appointments = Appointment::with('user')->get();
+            //$appointments = Appointment::with('user')->get();
+            $appointments = DB::table('appointments')
+            ->join('users as patients','appointments.user_id','=','patients.id')
+            ->join('users as providers', 'appointments.provider_id','=','providers.id')
+            ->select('appointments.*', DB::raw("CONCAT(patients.lastname, ' ', patients.name) AS patient"),DB::raw("CONCAT(providers.lastname, ' ', providers.name) AS provider"))->get();
             $events=[];
             foreach ($appointments as $apo) {
                 $events[]=[
-                    'title'=>$apo->user->lastname,
+                    'title'=>$apo->patient.' con '.$apo->provider,
                     'start'=>$apo->date,
                     'end'=>$apo->date,
                     'url'=>'appointment/'.$apo->id.'/edit',
@@ -100,10 +104,19 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        
+        //return $request;
+        $appointment->date  = $request->date;
+        $appointment->time = $request->time;
+        $appointment->provider_id = $request->provider_id;
+        $appointment->user_id = $request->user_id;
         $appointment->status = $request->status;
         $appointment->update();
-        return redirect(route('providerDash'))->with('status','has terminado una cita pasemos a la siguiente');
+        if (auth()->user()->role == 'secretary') {
+            return redirect(route('appointment.index'))->with('status','cita actualizada exitosamente');
+        }else{
+        return redirect(route('appointment.index'))->with('status','has terminado una cita pasemos a la siguiente');
+
+        }
     }
 
  

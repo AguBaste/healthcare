@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Provider
+class Prosec
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class Provider
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->role ==='provider'){
+       if($request->user()->role ==='secretary' || $request->user()->role ==='provider'){
         return $next($request);
         }
         // dd('no tienes autorización para ver este contenido, por favor vete de aquí.');
-        return redirect(route('error'));
+          return redirect(route('error'));
     }
 }

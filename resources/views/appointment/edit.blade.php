@@ -27,14 +27,14 @@
                          <div>
                             
                              <x-input-label for="user_id" value="paciente" />
-                             <x-text-input class="block mt-1 w-full" type="text" value="{{$appointment->user->lastname .' '. $appointment->name}}" name="user_id"  required/>
+                             <x-text-input class="block mt-1 w-full" type="text" value="{{$appointment->user_id}}" name="user_id"  required/>
                              <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
                          </div>
                          
                          <!-- date -->
                          <div class="mt-4">
                              <x-input-label for="date" value="fecha" />
-                             <x-text-input class="block mt-1 w-full" type="date" :value="old('date')" name="date" required/>
+                             <x-text-input class="block mt-1 w-full" type="date" value="{{old('date',$appointment->date)}}" name="date" required/>
                              <x-input-error :messages="$errors->get('date')" class="mt-2" />
                          </div>
 
@@ -44,7 +44,7 @@
                              <x-text-input class="block mt-1 w-full" type="time" :value="old('time')" name="time" required/>
                              <x-input-error :messages="$errors->get('time')" class="mt-2" />
                          </div>
-
+                         <input type="hidden" name="status" value="reservada">
                          <div class="flex items-center justify-center mt-4">
                              <x-primary-button class="ms-3">
                                  guardar
