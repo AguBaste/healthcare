@@ -40,6 +40,12 @@
                                 @csrf
                                 @method('patch')
                                 <input type="hidden" name="status" value="realizada">
+                                <input type="hidden" name="date" value="{{$appointment->date}}">
+                                <input type="hidden" name="time" value="{{$appointment->time}}">
+                                <input type="hidden" name="user_id" value="{{$appointment->user_id}}">
+                                <input type="hidden" name="provider_id" value="{{$appointment->provider_id}}">
+
+
                                 <x-primary-button>
                                     terminar cita
                                 </x-primary-button>

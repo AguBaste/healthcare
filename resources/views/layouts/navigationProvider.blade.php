@@ -27,6 +27,10 @@
                   <x-nav-link href="https://servicios.pami.org.ar/vademecum/views/consultaPublica/listado.zul" >
                         vademecum
                     </x-nav-link>
+                    {{-- editar --}}
+                    <x-nav-link :href="route('appointment.index')">
+                        mis hororios
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -17,7 +17,7 @@
                              <x-input-label for="provider_id" value="doctor" />
                              <select class="block mt-1 w-full" name="provider_id">
                                 @foreach ($providers as $item)
-                                    <option value="{{old('provider_id',$item->id)}}">{{$item->lastname . ' '.$item->name}}</option>
+                                    <option value="{{old('provider_id',$item->id)}}" {{$item->id == $appointment->provider_id ? 'selected':''}}>{{$item->lastname . ' '.$item->name}}</option>
                                 @endforeach
                              </select>
                              <x-input-error :messages="$errors->get('provider_id')" class="mt-2" />
@@ -25,9 +25,10 @@
 
                          <!-- patient -->
                          <div>
-                            
+                           
                              <x-input-label for="user_id" value="paciente" />
-                             <x-text-input class="block mt-1 w-full" type="text" value="{{$appointment->user_id}}" name="user_id"  required/>
+                             <x-text-input class="block mt-1 w-full" type="text" value="{{$appointment->user->lastname. ' '.$appointment->user->name}}" />
+                             <x-text-input class="block mt-1 w-full" type="hidden" value="{{$appointment->user_id}}" name="user_id"  required/>
                              <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
                          </div>
                          
@@ -41,7 +42,7 @@
                          <!-- time -->
                          <div class="mt-4">
                              <x-input-label for="time" value="hora" />
-                             <x-text-input class="block mt-1 w-full" type="time" :value="old('time')" name="time" required/>
+                             <x-text-input class="block mt-1 w-full" type="time" :value="old('time',$appointment->time)" name="time" required/>
                              <x-input-error :messages="$errors->get('time')" class="mt-2" />
                          </div>
                          <input type="hidden" name="status" value="reservada">

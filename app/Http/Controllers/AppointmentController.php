@@ -18,34 +18,54 @@ class AppointmentController extends Controller
      */
     public function index()
     {
+        $events=[];
         if (auth()->user()->role ==='secretary') {
             //$appointments = Appointment::with('user')->get();
             $appointments = DB::table('appointments')
             ->join('users as patients','appointments.user_id','=','patients.id')
             ->join('users as providers', 'appointments.provider_id','=','providers.id')
-            ->select('appointments.*', DB::raw("CONCAT(patients.lastname, ' ', patients.name) AS patient"),DB::raw("CONCAT(providers.lastname, ' ', providers.name) AS provider"))->get();
-            $events=[];
+            ->select('appointments.*', 'patients.lastname AS patient','providers.lastname AS provider')->get();
+            
             foreach ($appointments as $apo) {
-                $events[]=[
-                    'title'=>$apo->patient.' con '.$apo->provider,
-                    'start'=>$apo->date,
-                    'end'=>$apo->date,
+                if ($apo->provider == 'rottino') {
+                   $events[]=[
+                    'title'=> $apo->patient.' con '.$apo->provider,
+                    'start'=>$apo->date.' '.$apo->time,
+                    'end'=>$apo->date.' '.$apo->time,
                     'url'=>'appointment/'.$apo->id.'/edit',
+                    'color'=>'red'
                 ];
+                } else {
+                      $events[]=[
+                    'title'=> $apo->patient.' con '.$apo->provider,
+                    'start'=>$apo->date.' '.$apo->time,
+                    'end'=>$apo->date.' '.$apo->time,
+                    'url'=>'appointment/'.$apo->id.'/edit',
+                    'color'=>'blue'
+                ];
+                }
+            
             }
-           
-            return view('appointment.index',compact('events'));
+
+           return view('appointment.index',compact('events'));
+
         } else {
-            $date =  date('Y-m-d');
-        $appointments = Appointment::with('user')
-        ->where('provider_id', auth()->user()->id)
-        ->where('date',$date)
-        ->where('status','reservada')
-        ->get();
-        return view('appointment.index',compact('appointments'));
+            
+            $appointments = Appointment::where('provider_id',auth()->user()->id)
+            ->where('status','reservada')
+            ->get();
+           foreach ($appointments as $apo) {
+
+                $events[]=[
+                    'title'=>$apo->user->lastname.' '.$apo->user->name ,
+                    'start'=>$apo->date .' '.$apo->time,
+                    'end'=>$apo->date .' '.$apo->time,
+                    'url'=>'appointment/'.$apo->id,
+                    'color'=>'red'
+                ];
+           }
+           return view('appointment.index',compact('events'));
         }
-        
-        
     }
 
     /**
